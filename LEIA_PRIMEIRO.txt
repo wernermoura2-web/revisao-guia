@@ -1,0 +1,21 @@
+PUBLICAR A REVISÃO SEM ALTERAR O SITE PRINCIPAL
+
+1. Entre em github.com com wernermoura2-web.
+2. Crie um repositório separado: revisao-guia. Escolha Public e marque Add a README file.
+3. Extraia este ZIP. No repositório, Add file > Upload files. Envie o CONTEÚDO desta pasta para a raiz: index.html, sw.js, manifest.webmanifest, icon-192.png, icon-512.png e .nojekyll (este último é opcional para esta página).
+4. Clique Commit changes.
+5. Settings > Pages > Source: Deploy from a branch > Branch: main > pasta /(root) > Save.
+6. Aguarde o GitHub exibir o endereço publicado. O endereço previsto, se os nomes forem estes, é:
+https://wernermoura2-web.github.io/revisao-guia/
+Este pacote ainda não está publicado.
+
+NO ANDROID
+Abra o endereço HTTPS no Chrome. Revise um item e feche/abra o navegador para conferir se o rascunho volta. Cada processo salva seus próprios campos no navegador. Os dados não vão para Supabase nem são enviados ao GitHub.
+Para instalar: use Instalar na tela inicial se o botão aparecer; caso contrário, menu de três pontos do Chrome > Adicionar à tela inicial ou Instalar aplicativo, conforme a opção exibida no aparelho.
+Abra pelo mesmo endereço/atalho. Não use o antigo arquivo local. A primeira abertura precisa de internet. O uso offline só fica disponível depois que o navegador terminar de guardar o aplicativo. Reconhecimento de voz pode exigir internet e permissão de microfone. Compartilhamento de arquivo depende do suporte do Chrome.
+
+REVISÕES QUE VOCÊ JÁ PREENCHEU
+No formulário antigo, exporte o JSON. No novo endereço, abra o processo correspondente e use Abrir revisão JSON. O site não consegue acessar automaticamente os rascunhos do arquivo local antigo.
+
+SEGURANÇA DO PREENCHIMENTO
+Exporte o JSON ao encerrar e antes de limpar dados do Chrome/desinstalar o atalho. O salvamento local não é uma cópia de segurança externa. Confira também o PDF. Envie os JSON revisados para aprovação antes de atualizar os sistemas e cálculos. Se surgir falha de atualização, preserve os JSON antes de limpar qualquer dado.
