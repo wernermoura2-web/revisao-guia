@@ -1,22 +1,17 @@
-PUBLICAÇÃO — guias_18_paginas
+PUBLICAR EM revisao-guia
+Extraia este ZIP. Envie todos os arquivos e as duas pastas para a raiz do repositório revisao-guia, mantendo a estrutura das pastas. Substitua os arquivos de mesmo nome. Não envie o ZIP.
+Mantenha Settings > Pages na branch já configurada e /(root).
+Menu: https://wernermoura2-web.github.io/revisao-guia/
+18 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_18_paginas/
+22 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_appcc_22_paginas/
+Painel: https://wernermoura2-web.github.io/revisao-guia/Painel_Consolidacao_Revisoes.html
+Os links novos funcionam após a publicação terminar. Os guias não usam banco de dados. Exporte o JSON para guardar seu preenchimento. JSONs antigos podem ser abertos nos respectivos guias. Não foi feita migração automática de rascunhos dos outros endereços.
+O modo offline da revisão não garante o carregamento inicial dos guias adicionais. Abra os guias com internet e mantenha seu JSON salvo.
 
-1. Crie o repositório público guias_18_paginas na conta wernermoura2-web.
-2. Extraia este ZIP.
-3. No repositório, Add file > Upload files: envie TODOS OS ARQUIVOS extraídos diretamente na raiz, e não o ZIP nem a pasta externa.
-4. Confirme o upload na branch do repositório.
-5. Settings > Pages > Source: Deploy from a branch. Escolha a branch em que os arquivos estão (normalmente main; confira o nome) e a pasta /(root). Save.
-6. Actions: aguarde pages build and deployment ficar verde.
-7. Abra https://wernermoura2-web.github.io/guias_18_paginas/
+INDICADORES
+Novo acesso: https://wernermoura2-web.github.io/revisao-guia/INDICADORES_CELULAR.html
+Importe JSON de inspeção salvo nos guias. JSON de revisão dos textos não é uma inspeção. PDFs são guardados para transferência, sem extração nesta versão. O aplicativo Python de computador e seus slides continuam locais. Os arquivos importados ficam no navegador do aparelho; exporte o arquivo para PC como cópia de segurança.
 
-Não confunda com a branch man do repositório revisao-guia: este repositório pode usar main.
-
-Pacote extraído do ZIP enviado. Preservadas as funcionalidades dos guias. Apenas o nome do banco de rascunhos do navegador foi separado entre individual e equipe. Os JSONs continuam portáteis.
-As versões individual e equipe do arquivo enviado têm o mesmo formulário e as mesmas funções de importação. Aqui elas possuem acessos e rascunhos separados. Não foi retirada nenhuma função.
-
-O site hospeda os formulários; não armazena inspeções no GitHub. Salve o JSON antes de sair. Rascunhos de arquivos content:// não migram automaticamente: abra seu JSON no site. Este pacote não oferece instalação offline; o atalho da tela inicial abre o site.
-
-Este pacote usa exatamente os PDFs presentes no ZIP enviado. Não é uma revisão dos PDFs nem uma aplicação das contribuições APPCC ainda em revisão.
-
-PDFs incluídos: original de 18 páginas e original de 18 ampliado para 22 páginas.
-
-Incluído também Guia_Rev6_Referencia.pdf, com botão na página inicial. O HTML com banco permanece no repositório já existente.
+CADASTRO DE ENVASADORAS E SELOS
+Abra CADASTRO_ENVASADORAS_SELOS.html ou pelo menu. Cadastre e salve a envasadora. Selecione-a e salve a portaria; PDF opcional até 20 MB. Salvar cadastro JSON inclui os PDFs. Abrir JSON substitui o cadastro atual após confirmação, não mescla. Guarde sua cópia JSON. Rascunhos locais podem exceder a capacidade do navegador com PDFs; nesse caso salve o JSON. Não existe autenticação nesta versão. Não envie JSONs preenchidos ao GitHub público. Nenhum cadastro ou portaria real foi incluído.
+\nATUALIZAÇÃO CRONOGRAMA E SEI\nO cadastro inclui cronograma anual com filtros, impressão, número de processo SEI, ID do guia de inspeção/reinspeção, link opcional, signatários e entrega. Todos os registros são exportados no mesmo JSON. JSON anterior de cadastro continua aceito, sem cronograma. Minuta com símbolos dos selos não incluída: aguarda modelo final.\n
