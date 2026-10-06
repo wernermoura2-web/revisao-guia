@@ -7,3 +7,4 @@ Menu: https://wernermoura2-web.github.io/revisao-guia/
 Painel: https://wernermoura2-web.github.io/revisao-guia/Painel_Consolidacao_Revisoes.html
 Os links novos funcionam após a publicação terminar. Os guias não usam banco de dados. Exporte o JSON para guardar seu preenchimento. JSONs antigos podem ser abertos nos respectivos guias. Não foi feita migração automática de rascunhos dos outros endereços.
 O modo offline da revisão não garante o carregamento inicial dos guias adicionais. Abra os guias com internet e mantenha seu JSON salvo.
+Atualização da publicação em 06/10/2026.
