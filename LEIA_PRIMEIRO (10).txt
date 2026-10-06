@@ -1,0 +1,16 @@
+PUBLICAR EM revisao-guia
+Extraia este ZIP. Envie todos os arquivos e as duas pastas para a raiz do repositório revisao-guia, mantendo a estrutura das pastas. Substitua os arquivos de mesmo nome. Não envie o ZIP.
+Mantenha Settings > Pages na branch já configurada e /(root).
+Menu: https://wernermoura2-web.github.io/revisao-guia/
+18 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_18_paginas/
+22 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_appcc_22_paginas/
+Painel: https://wernermoura2-web.github.io/revisao-guia/Painel_Consolidacao_Revisoes.html
+Os links novos funcionam após a publicação terminar. Os guias não usam banco de dados. Exporte o JSON para guardar seu preenchimento. JSONs antigos podem ser abertos nos respectivos guias. Não foi feita migração automática de rascunhos dos outros endereços.
+O modo offline da revisão não garante o carregamento inicial dos guias adicionais. Abra os guias com internet e mantenha seu JSON salvo.
+
+INDICADORES
+Novo acesso: https://wernermoura2-web.github.io/revisao-guia/INDICADORES_CELULAR.html
+Importe JSON de inspeção salvo nos guias. JSON de revisão dos textos não é uma inspeção. PDFs são guardados para transferência, sem extração nesta versão. O aplicativo Python de computador e seus slides continuam locais. Os arquivos importados ficam no navegador do aparelho; exporte o arquivo para PC como cópia de segurança.
+
+CADASTRO DE ENVASADORAS E SELOS
+Abra CADASTRO_ENVASADORAS_SELOS.html ou pelo menu. Cadastre e salve a envasadora. Selecione-a e salve a portaria; PDF opcional até 20 MB. Salvar cadastro JSON inclui os PDFs. Abrir JSON substitui o cadastro atual após confirmação, não mescla. Guarde sua cópia JSON. Rascunhos locais podem exceder a capacidade do navegador com PDFs; nesse caso salve o JSON. Não existe autenticação nesta versão. Não envie JSONs preenchidos ao GitHub público. Nenhum cadastro ou portaria real foi incluído.
