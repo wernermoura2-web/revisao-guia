@@ -1,17 +1,16 @@
-PUBLICAR EM revisao-guia
-Extraia este ZIP. Envie todos os arquivos e as duas pastas para a raiz do repositório revisao-guia, mantendo a estrutura das pastas. Substitua os arquivos de mesmo nome. Não envie o ZIP.
-Mantenha Settings > Pages na branch já configurada e /(root).
-Menu: https://wernermoura2-web.github.io/revisao-guia/
-18 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_18_paginas/
-22 páginas: https://wernermoura2-web.github.io/revisao-guia/guias_appcc_22_paginas/
-Painel: https://wernermoura2-web.github.io/revisao-guia/Painel_Consolidacao_Revisoes.html
-Os links novos funcionam após a publicação terminar. Os guias não usam banco de dados. Exporte o JSON para guardar seu preenchimento. JSONs antigos podem ser abertos nos respectivos guias. Não foi feita migração automática de rascunhos dos outros endereços.
-O modo offline da revisão não garante o carregamento inicial dos guias adicionais. Abra os guias com internet e mantenha seu JSON salvo.
+ATUALIZAÇÃO APPCC PARA ENVIO PELO CELULAR
 
-INDICADORES
-Novo acesso: https://wernermoura2-web.github.io/revisao-guia/INDICADORES_CELULAR.html
-Importe JSON de inspeção salvo nos guias. JSON de revisão dos textos não é uma inspeção. PDFs são guardados para transferência, sem extração nesta versão. O aplicativo Python de computador e seus slides continuam locais. Os arquivos importados ficam no navegador do aparelho; exporte o arquivo para PC como cópia de segurança.
+1. Extraia este ZIP em Meus Arquivos.
+2. Abra github.com/wernermoura2-web/revisao-guia e selecione a branch man.
+3. Add file > Upload files > Escolha seus arquivos.
+4. Selecione os CINCO arquivos desta pasta e confirme as alterações.
+5. Aguarde Actions concluir a publicação.
 
-CADASTRO DE ENVASADORAS E SELOS
-Abra CADASTRO_ENVASADORAS_SELOS.html ou pelo menu. Cadastre e salve a envasadora. Selecione-a e salve a portaria; PDF opcional até 20 MB. Salvar cadastro JSON inclui os PDFs. Abrir JSON substitui o cadastro atual após confirmação, não mescla. Guarde sua cópia JSON. Rascunhos locais podem exceder a capacidade do navegador com PDFs; nesse caso salve o JSON. Não existe autenticação nesta versão. Não envie JSONs preenchidos ao GitHub público. Nenhum cadastro ou portaria real foi incluído.
-\nATUALIZAÇÃO CRONOGRAMA E SEI\nO cadastro inclui cronograma anual com filtros, impressão, número de processo SEI, ID do guia de inspeção/reinspeção, link opcional, signatários e entrega. Todos os registros são exportados no mesmo JSON. JSON anterior de cadastro continua aceito, sem cronograma. Minuta com símbolos dos selos não incluída: aguarda modelo final.\n
+Arquivos: index.html, REVISAO_APPCC.html, sw.js, APPCC_Arvore_Com_Caminhos_Resumo_V6.pdf, LEIA_PRIMEIRO.txt.
+Eles ficam diretamente na raiz. Não é necessário criar pasta appcc.
+Esta atualização preserva os links dos guias, indicadores, cadastro e painel já presentes no repositório. Não apague os arquivos ou pastas anteriores. O ZIP contém somente a atualização, não o site inteiro.
+
+Página principal: https://wernermoura2-web.github.io/revisao-guia/
+Revisão APPCC: https://wernermoura2-web.github.io/revisao-guia/REVISAO_APPCC.html
+
+Cada revisor salva seu JSON e o envia à coordenação. PDF é uma cópia para conferência. Não envie JSONs preenchidos para o repositório público.
