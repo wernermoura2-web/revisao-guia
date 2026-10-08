@@ -1,3 +1,1 @@
-ATUALIZAÇÃO V7: HTML E PDF CORRIGIDOS
-Envie os seis arquivos para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Preserve demais pastas. O PDF V6 também foi substituído pelo conteúdo corrigido; o menu usa V7 para evitar a cópia antiga.
-Após Actions concluir, abra REVISAO_APPCC.html?v=7. Confira a faixa Versão V7. JSONs anteriores continuam compatíveis.
+V7 COM DEFINIÇÕES - Envie os seis arquivos para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Preserve outras pastas. Após Actions concluir, abra REVISAO_APPCC.html?v=7-definicoes. As definições aparecem no início do HTML e do PDF. JSONs anteriores permanecem compatíveis.
