@@ -1,16 +1,6 @@
-ATUALIZAÇÃO APPCC PARA ENVIO PELO CELULAR
-
-1. Extraia este ZIP em Meus Arquivos.
-2. Abra github.com/wernermoura2-web/revisao-guia e selecione a branch man.
-3. Add file > Upload files > Escolha seus arquivos.
-4. Selecione os CINCO arquivos desta pasta e confirme as alterações.
-5. Aguarde Actions concluir a publicação.
-
-Arquivos: index.html, REVISAO_APPCC.html, sw.js, APPCC_Arvore_Com_Caminhos_Resumo_V6.pdf, LEIA_PRIMEIRO.txt.
-Eles ficam diretamente na raiz. Não é necessário criar pasta appcc.
-Esta atualização preserva os links dos guias, indicadores, cadastro e painel já presentes no repositório. Não apague os arquivos ou pastas anteriores. O ZIP contém somente a atualização, não o site inteiro.
-
-Página principal: https://wernermoura2-web.github.io/revisao-guia/
-Revisão APPCC: https://wernermoura2-web.github.io/revisao-guia/REVISAO_APPCC.html
-
-Cada revisor salva seu JSON e o envia à coordenação. PDF é uma cópia para conferência. Não envie JSONs preenchidos para o repositório público.
+ATUALIZAÇÃO — DECISÕES APPCC EM TRÊS PARTES
+Extraia o ZIP. Envie os cinco arquivos diretamente para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Não apague pastas/arquivos dos guias anteriores. Aguarde a publicação em Actions.
+Abrir: https://wernermoura2-web.github.io/revisao-guia/REVISAO_APPCC.html
+Cada frase agora mostra: (1) possibilidade de PCC, A–E; (2) enquadramento não crítico, F–I; (3) confirmação e consolidação, J. Não se usa mais Q1–Q4 na decisão.
+As categorias propostas e as contribuições salvas não foram alteradas. JSONs anteriores desta revisão continuam compatíveis. Informação insuficiente é explicitada, sem transformar hipótese em constatação. A tabela final continua disponível.
+Salvar JSON é o arquivo principal para enviar à coordenação. Imprimir/salvar PDF registra a decisão detalhada e sua revisão. O PDF de referência V6 permanece o mesmo.
