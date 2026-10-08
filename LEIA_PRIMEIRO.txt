@@ -1,1 +1,4 @@
-V7 COM DEFINIÇÕES - Envie os seis arquivos para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Preserve outras pastas. Após Actions concluir, abra REVISAO_APPCC.html?v=7-definicoes. As definições aparecem no início do HTML e do PDF. JSONs anteriores permanecem compatíveis.
+PACOTE COMPLETO COM LINKS CORRIGIDOS
+Extraia o ZIP. Todos os arquivos ficam na mesma pasta. Abra index.html para usar no computador. No celular, prefira o site GitHub Pages.
+No GitHub revisao-guia, branch man: Add file > Upload files, selecione TODOS os arquivos extraídos (não o ZIP), confirme alterações e aguarde Actions. Não é necessário criar pastas. Não apague outros arquivos do repositório.
+O menu tem quatro botões diretos: 18 individual/equipe e 22 individual/equipe. Os PDFs, manuais, revisão APPCC e os módulos existentes acompanham o pacote. Esta correção reúne os guias existentes; não aplica a adaptação da consulta pública aos formulários.
