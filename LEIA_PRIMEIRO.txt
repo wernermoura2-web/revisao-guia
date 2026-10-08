@@ -1,6 +1,3 @@
-ATUALIZAÇÃO — DECISÕES APPCC EM TRÊS PARTES
-Extraia o ZIP. Envie os cinco arquivos diretamente para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Não apague pastas/arquivos dos guias anteriores. Aguarde a publicação em Actions.
-Abrir: https://wernermoura2-web.github.io/revisao-guia/REVISAO_APPCC.html
-Cada frase agora mostra: (1) possibilidade de PCC, A–E; (2) enquadramento não crítico, F–I; (3) confirmação e consolidação, J. Não se usa mais Q1–Q4 na decisão.
-As categorias propostas e as contribuições salvas não foram alteradas. JSONs anteriores desta revisão continuam compatíveis. Informação insuficiente é explicitada, sem transformar hipótese em constatação. A tabela final continua disponível.
-Salvar JSON é o arquivo principal para enviar à coordenação. Imprimir/salvar PDF registra a decisão detalhada e sua revisão. O PDF de referência V6 permanece o mesmo.
+ATUALIZAÇÃO V7: HTML E PDF CORRIGIDOS
+Envie os seis arquivos para a raiz de revisao-guia, branch man, substituindo os mesmos nomes. Preserve demais pastas. O PDF V6 também foi substituído pelo conteúdo corrigido; o menu usa V7 para evitar a cópia antiga.
+Após Actions concluir, abra REVISAO_APPCC.html?v=7. Confira a faixa Versão V7. JSONs anteriores continuam compatíveis.
