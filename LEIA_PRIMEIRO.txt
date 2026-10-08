@@ -1,3 +1,2 @@
-REVISÃO APPCC SIMPLIFICADA
-Envie todos os arquivos extraídos à raiz de revisao-guia, branch man, substituindo os existentes. Preserve outros arquivos. Aguarde Actions concluir.
-Cada frase possui uma caixa APPCC pré-selecionada com a proposta do PDF. Troque a categoria nessa mesma caixa se necessário. Informe revisor e salve JSON para enviar. Imprimir/salvar PDF gera cópia da revisão. A análise detalhada continua nos PDFs V6/V7. Guías de preenchimento permanecem no pacote. JSONs anteriores continuam compatíveis; seus comentários são preservados, sem campo para novos comentários.
+REVISÃO APPCC MÍNIMA
+Os processos mostram apenas item, frase e caixa APPCC pré-selecionada. Nome do revisor e botões de salvar/abrir JSON e imprimir permanecem no topo. Envie todos os arquivos para a raiz de revisao-guia, substituindo os existentes.
