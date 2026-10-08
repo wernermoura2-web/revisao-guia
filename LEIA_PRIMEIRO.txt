@@ -1,2 +1,2 @@
-REVISÃO APPCC MÍNIMA
-Os processos mostram apenas item, frase e caixa APPCC pré-selecionada. Nome do revisor e botões de salvar/abrir JSON e imprimir permanecem no topo. Envie todos os arquivos para a raiz de revisao-guia, substituindo os existentes.
+MENU COM ORIENTAÇÕES
+Guia de 18 páginas possui um único link: Guia_18.html. O menu explica quando usar cada módulo. Todos os arquivos ficam na raiz. Envie os arquivos extraídos para revisao-guia, substituindo os existentes, e aguarde Actions. Os nomes antigos de individual/equipe foram mantidos como arquivos para preservar links já compartilhados, mas não aparecem como opções separadas no menu de 18 páginas.
