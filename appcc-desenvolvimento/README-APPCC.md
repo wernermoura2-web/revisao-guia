@@ -1,4 +1,4 @@
-# Guia APPCC — teste e desenvolvimento
+# Guia APPCC — revisão legislativa
 
 Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html
 
@@ -9,7 +9,7 @@ Arquivos:
 - html.appcc.pdf.html: acesso ao modelo PDF de 22 páginas.
 - html.appcc.cel.html: instalação no celular.
 
-O formulário contém 82 indicadores, 161 frases e 58 documentos de apoio da tabela revisada. Permite salvar/abrir JSON, fotografias e rótulos; revisar frases, referências, categorias e pesos; e gerar o PDF preenchido. O JSON é a cópia portátil entre aparelhos.
+O formulário reúne 71 indicadores distintos e conserva as avaliações, frases e 58 documentos de apoio de cada grupo da tabela revisada. Permite salvar/abrir JSON, fotografias e rótulos; revisar frases, referências, categorias e pesos; e gerar o PDF preenchido. O JSON é a cópia portátil entre aparelhos.
 
 A instalação usa o manifesto e service worker desta pasta, com escopo restrito a appcc-desenvolvimento. Abra uma vez com internet para preparar o uso offline. A CP 1.365/2025 é utilizada como proposta para testes; confira os requisitos após a publicação do ato definitivo da Anvisa. A metodologia de risco é experimental e sujeita a validação.
 
@@ -34,3 +34,11 @@ A revisão de instalação 9 segue o fluxo do AMESC: captura o evento nativo em 
 A revisão 2026.10.12.10 usa descrições resumidas na impressão: 82 indicadores e 161 frases, com a primeira frase na mesma linha do indicador, sem espaçamento entre frases. A redação completa continua no formulário; frases personalizadas são impressas integralmente. O PDF conserva 22 páginas e reserva no mínimo 60 mm para as observações de cada página de processos 1 a 6; os processos 7 e 8 têm campos maiores por indicador.
 
 A terceira opção do menu é um botão que chama o instalador, sem ir à página html.appcc.cel.html. O aplicativo não considera que estar em qualquer janela standalone prove instalação do APPCC. Quando aberto dentro da PWA antiga Revisão Guia ou de outro aplicativo no Android, a solicitação abre o Chrome no mesmo menu para obter o instalador nativo; não existe página intermediária de instalação. A janela de confirmação e a conclusão da instalação são controladas pelo navegador.
+
+A revisão 2026.10.12.11 alinha as colunas pela identidade do indicador: recepção com cinco linhas compartilhadas; capacitação e POP de tampas nas linhas equivalentes; controle das tampas em linha própria. Uma resposta Não prevalece sobre Sim, NA e respostas pendentes. Os cinco indicadores de reservatórios são contados apenas uma vez, embora apareçam nas páginas de cada captação. Os identificadores internos dos arquivos JSON, respostas, observações e configurações existentes são preservados.
+
+A impressão usa MODELO PARA IMPRESSÃO no cabeçalho, fonte Poço/Surgência, título Captação depois dos dados da envasadora e o título estadual da avaliação de risco. A matriz mantém verde, amarelo e vermelho; os processos críticos de condução, reservatórios, recepção e higienização são de alto risco abaixo de 100%, conforme o modelo de referência. As linhas iniciais de identificação foram retiradas das páginas de envase, controle de qualidade e responsabilidade. As observações do envase usam uma coluna.
+
+A classificação do estabelecimento exibe os grupos 1, 2 e 3 com os textos do modelo e seleção automática pelo risco calculado. Fotografias e rótulos têm botão Girar 90° no formulário, nas fotos vinculadas às frases e na prévia de impressão; a rotação da prévia atualiza a imagem no guia. Os controles são ocultados ao imprimir.
+
+O modelo PDF mantém 22 páginas editáveis, resultados conjuntos com prioridade de Não e classificação automática em leitores com suporte a JavaScript de formulários, como Acrobat. No HTML, o cálculo e a classificação ficam disponíveis no navegador e são incorporados ao PDF preenchido gerado pela impressão.
