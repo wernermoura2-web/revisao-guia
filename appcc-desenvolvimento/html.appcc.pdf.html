@@ -43,6 +43,7 @@
   refresh();if(standalone())message('APPCC Teste aberto pelo ícone do aplicativo.');
   else if(promptEvent)message('Pronto para instalar. Toque em Instalar no celular.');
   else if(location.protocol==='file:')message('Abra a versão online para instalar.');
+  else if(offline)message('Guia disponível offline. Toque em Instalar no celular.');
  }
  // Capture the native installer before the guide's data and rendering code runs.
  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;completed=false;refresh();message('Pronto para instalar. Toque em Instalar no celular.');});

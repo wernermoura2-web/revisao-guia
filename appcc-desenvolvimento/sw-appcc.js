@@ -1,4 +1,4 @@
-const CACHE='guia-appcc-desenvolvimento-github-v6';
+const CACHE='guia-appcc-desenvolvimento-github-v7';
 const CORE=["./html.appc.html", "./html.appcc.int.html", "./html.appcc.pdf.html", "./html.appcc.cel.html", "./manifest-appcc.webmanifest?v=9", "./icon-appcc-192.png", "./icon-appcc-512.png"];
 const OPTIONAL=["./Guia_APPCC_22_Paginas.pdf"];
 const ALLOWED_PATHS=new Set([...CORE,...OPTIONAL].map(path=>new URL(path,self.location.href).pathname));
