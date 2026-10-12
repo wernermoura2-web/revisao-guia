@@ -1,6 +1,6 @@
 # Guia APPCC — revisão legislativa
 
-Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html?v=12
+Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html?v=13
 
 Arquivos:
 
@@ -44,3 +44,7 @@ A classificação do estabelecimento exibe os grupos 1, 2 e 3 com os textos do m
 O modelo PDF mantém 22 páginas editáveis, resultados conjuntos com prioridade de Não e classificação automática em leitores com suporte a JavaScript de formulários, como Acrobat. No HTML, o cálculo e a classificação ficam disponíveis no navegador e são incorporados ao PDF preenchido gerado pela impressão.
 
 A atualização de navegação 12 versiona os links do menu, formulário e PDF para solicitar a cópia atual ao navegador e ao cache offline. O download usa o nome Guia_APPCC_Risco_Corrigido.pdf. A matriz de conteúdo 2026.10.12.11 classifica a faixa 76-99% dos processos 2, 3, 4 e 5 como 3 ALTO, em vermelho.
+
+## Atualização APPCC — 12/10/2026
+
+Nos processos 2, 3, 4 e 5, o atendimento de 76 a 99% corresponde a 2 MÉDIO (amarelo). Atendimento de 100% permanece 1 BAIXO e até 75% permanece 3 ALTO. Regra aplicada ao cálculo, à matriz e aos modelos de impressão HTML e PDF. Versão 2026.10.12.13.
