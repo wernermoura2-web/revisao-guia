@@ -9,7 +9,70 @@
 <meta name="apple-mobile-web-app-title" content="Guia APPCC">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>Guia APPCC — teste e desenvolvimento</title>
-<link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest">
+<link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=9">
+<script id="appcc-install">window.AppccPWA=(()=>{
+ 'use strict';
+ const root='https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/';
+ const installURL=root+'html.appcc.cel.html?v=9';
+ let promptEvent=null,busy=false,requested=false,completed=false,initialized=false,offline=false;
+ const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true);
+ const android=()=>/Android/i.test(navigator.userAgent||'');
+ const ios=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent||'')||navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1;
+ function chromeURL(){const url=new URL(installURL);return 'intent://'+url.host+url.pathname+url.search+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url.href)+';end';}
+ function message(text){document.querySelectorAll('[data-pwa-status]').forEach(el=>el.textContent=text);}
+ function refresh(){
+  document.querySelectorAll('[data-pwa-install]').forEach(el=>{el.hidden=standalone()||completed;el.disabled=busy;el.textContent=busy?'Abrindo instalador…':'Instalar no celular';});
+  document.querySelectorAll('[data-pwa-chrome]').forEach(el=>{el.href=chromeURL();el.hidden=!android();});
+  document.querySelectorAll('[data-pwa-link]').forEach(el=>el.href=installURL);
+  document.querySelectorAll('[data-pwa-ios]').forEach(el=>el.hidden=!ios());
+  const status=document.getElementById('offlineStatus');if(status&&offline)status.textContent='Acesso offline disponível';
+ }
+ function showHelp(){
+  refresh();const dialog=document.getElementById('installDialog'),help=document.getElementById('installHelp');
+  if(dialog&&!dialog.open){if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');}
+  if(help){help.hidden=false;help.scrollIntoView?.({behavior:'smooth',block:'start'});}
+  message(location.protocol==='file:'?'Abra a versão online para instalar o APPCC Teste.':ios()?'No Safari, toque em Compartilhar e Adicionar à Tela de Início.':'No Chrome, abra o menu ⋮ e escolha Instalar aplicativo ou Adicionar à tela inicial → Instalar.');
+ }
+ async function install(){
+  if(busy||standalone()||completed)return;
+  if(promptEvent){
+   const event=promptEvent;promptEvent=null;busy=true;
+   try{
+    // Invoke the browser synchronously within this button's user gesture.
+    const opening=event.prompt();refresh();
+    const result=await opening,choice=event.userChoice?await event.userChoice:result;
+    requested=choice?.outcome==='accepted';
+    message(requested?'Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste na lista de aplicativos.':'Instalação cancelada.');
+   }catch(error){requested=false;showHelp();}
+   finally{busy=false;refresh();}
+   return;
+  }
+  showHelp();
+ }
+ function offlineReady(){offline=true;refresh();if(!requested&&!promptEvent)message('Guia disponível offline. Use Instalar no celular para adicionar o aplicativo.');}
+ function init(){
+  refresh();if(standalone())message('APPCC Teste aberto pelo ícone do aplicativo.');
+  else if(promptEvent)message('Pronto para instalar. Toque em Instalar no celular.');
+  else if(location.protocol==='file:')message('Abra a versão online para instalar.');
+ }
+ // Capture the native installer before the guide's data and rendering code runs.
+ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;completed=false;refresh();message('Pronto para instalar. Toque em Instalar no celular.');});
+ window.addEventListener('appinstalled',()=>{promptEvent=null;requested=true;completed=true;refresh();message('Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste.');});
+ window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',init);
+ function start(){
+  if(initialized)return;initialized=true;
+  if(location.protocol==='https:'&&'serviceWorker' in navigator){
+   navigator.serviceWorker.register(new URL('./sw-appcc.js',document.baseURI),{scope:'./',updateViaCache:'none'}).then(reg=>{
+    if(reg.active)offlineReady();const worker=reg.installing||reg.waiting;
+    worker?.addEventListener('statechange',()=>{if(worker.state==='activated')offlineReady();});
+    reg.update?.().catch(()=>{});
+   }).catch(()=>{message('Mantenha a conexão para preparar a instalação.');});
+   navigator.serviceWorker.addEventListener?.('controllerchange',offlineReady);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+ }
+ start();return {init,install,chromeURL,isStandalone:standalone};
+})();</script>
 <link rel="apple-touch-icon" href="./icon-appcc-192.png">
 <style>
 :root{--blue:#075a9c;--ink:#193244;--teal:#086766;--line:#c9d9e4;--paper:#fff;--bg:#edf3f7}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}button,input,select,textarea{font:inherit}button,.button{border:0;background:var(--blue);color:#fff;border-radius:7px;padding:10px 14px;font-weight:700;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}button:hover,.button:hover{filter:brightness(.95)}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #e1a417;outline-offset:2px}.secondary{background:#e7eff5;color:var(--blue);border:1px solid #a9c4d7}.danger-outline{border:1px solid #c88489;background:#fff;color:#9b222b}.top{background:var(--blue);color:#fff;padding:18px max(18px,calc((100vw - 1320px)/2));display:flex;align-items:center;gap:15px}.mark{width:44px;height:51px;flex:none}.top h1{font-size:21px;line-height:1.2;margin:0 0 5px}.top p{font-size:13px;margin:0;opacity:.95}.version-tag{font-size:11px;letter-spacing:.6px;background:#ffffff21;display:inline-block;border:1px solid #ffffff50;border-radius:4px;padding:2px 6px;margin-top:6px}.workspace{max-width:1350px;padding:16px;margin:auto}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar .install{background:var(--teal);margin-left:auto}.status{margin:10px 0;font-size:13px;color:#526b7c}.status.error{background:#fff0d5;padding:12px;border-left:4px solid #c18a23;color:#69470b}.offline{display:inline-block;padding:3px 8px;color:#3f6172;background:#fff;border:1px solid var(--line);border-radius:20px;font-size:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;margin:0 0 14px}.identification{margin-top:12px}.identification .header-text{min-height:70px;height:70px;resize:vertical;white-space:pre-wrap}.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.fields .wide{grid-column:span 2}label{display:block;font-size:14px;margin:9px 0;color:#29475a;font-weight:600}input,select,textarea{width:100%;display:block;margin-top:6px;border:1px solid #acc2d1;border-radius:6px;padding:10px;background:#fff;color:var(--ink);min-height:44px}textarea{resize:vertical;min-height:90px;font-weight:400;line-height:1.5}textarea.large{min-height:190px}input[type=radio],input[type=checkbox]{width:20px;min-height:20px;height:20px;margin:0;display:inline-block;accent-color:var(--blue);flex:none}input[hidden]{display:none}select:disabled{background:#f0f2f4;color:#778894}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:16px;align-items:start}.side{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding:12px;background:#fff;border:1px solid var(--line);border-radius:10px}.nav-label{color:#637989;font-size:10px;font-weight:bold;letter-spacing:.7px;margin:16px 5px 7px}.nav-label:first-child{margin-top:3px}.nav-button{width:100%;text-align:left;justify-content:flex-start;background:#fff;color:#355063;font-weight:500;font-size:13px;line-height:1.35;border-radius:5px;padding:9px 10px;margin:2px 0}.nav-button.selected{background:#dcecf7;color:#075a9c;font-weight:700;border-left:4px solid var(--blue)}h2{font-size:21px;margin:0 0 12px;line-height:1.3}h3{font-size:18px;margin:5px 0 12px}h4{font-size:16px;margin:0}p{margin:10px 0}.eyebrow{font-size:10px;font-weight:bold;letter-spacing:1px;margin:0 0 4px;color:#4c728b}.section-head,.indicator-heading,.phrase-head{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.section-head{justify-content:space-between}.muted{color:#61798a;font-size:13px}.badge{padding:4px 9px;border-radius:5px;border:1px solid transparent;font-size:12px;font-weight:700;white-space:nowrap}.low{background:#e3f4e2;color:#17572b;border-color:#95c899}.med{background:#fff5c7;color:#67510f;border-color:#d8c46a}.high{background:#fbe5e7;color:#922b35;border-color:#e2a2aa}.neutral,.pending{background:#edf2f6;color:#536b7c;border-color:#c7d5df}.indicator{border-top:1px solid var(--line);margin-top:22px;padding-top:18px}.indicator-heading{margin-bottom:12px}.indicator-heading .badge{margin-left:auto}.unit-tools{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:14px 0}.check{display:flex;gap:9px;align-items:center}details{border:1px solid var(--line);border-radius:7px;padding:10px 12px;background:#fafcfd;margin:8px 0}summary{cursor:pointer;font-size:14px;font-weight:700;min-height:28px;color:var(--blue)}.phrase{padding:18px 0;border-top:1px solid #d9e3eb}.phrase:first-of-type{border-top:0}.phrase-text{font-size:16px;line-height:1.65;color:#183c52}.reference{font-size:12px;color:#667f90;border-left:2px solid #b3c9d8;padding-left:9px}.class-label{color:#08736b;background:#dff1ef;border-radius:4px;padding:3px 8px;font-size:12px;font-weight:bold}.answers{display:flex;gap:17px;flex-wrap:wrap}.answers label{display:flex;gap:7px;align-items:center;cursor:pointer;font-weight:400}.support{padding:12px;background:#edf4f8;border:1px solid #cadbe6;border-radius:7px;margin:12px 0}.support>b{font-size:14px}.support details{background:#f7fbfd}.support p{font-size:14px}.decision{margin-top:12px;padding:10px 12px;background:#eaf2f8;border-radius:6px;display:flex;justify-content:space-between;gap:10px;font-size:13px}.notice{background:#fff7df;border:1px solid #e4d296;border-left:4px solid #c99829;border-radius:5px;padding:12px;font-size:13px;color:#6b5525}.table-scroll{max-width:100%;overflow:auto}table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{border:1px solid #bfd0dd;padding:10px;text-align:left;vertical-align:top}th{background:#e3eef6}td .badge{display:inline-block}.legal-docs{min-width:720px}.legal-docs td:first-child{width:26%}.legal-docs td:last-child{width:32%}.legal-docs textarea{min-height:70px;margin:0}.global-risk{font-weight:bold}.text-preview{font:14px/1.65 Arial;white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f9fb;border:1px solid #d8e3eb;border-radius:6px;padding:14px}.image-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.image-card{margin:0}.photo-stage{height:340px;position:relative;background:#f8fafc;border:1px solid #c3d6e4;border-radius:5px;overflow:hidden}.photo-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.photo-title{position:absolute;top:8px;left:8px;background:#ffffffe6;padding:4px 7px;border-radius:4px;font-size:13px}.photo-rotate{position:absolute;right:8px;top:8px;min-height:38px;padding:7px;background:#fffffff0;color:#174f73;border:1px solid #b8cddd;font-size:12px}.photo-caption{position:absolute;bottom:8px;left:8px;right:8px;background:#ffffffe6;padding:6px;font-size:12px;line-height:1.3;max-height:70px;overflow:auto;white-space:pre-wrap}.photo-caption:empty{display:none}.photo-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.thumb{width:80px;height:70px;object-fit:contain;border:1px solid var(--line);background:#fff}.class-editor{display:grid;grid-template-columns:minmax(0,1fr) 105px;gap:12px;align-items:start;padding:12px 0;font-weight:400}.class-editor select{margin:0}.config-item{border-top:1px solid var(--line);margin:16px 0;padding:14px 0}.mobile-menu{display:none}.bottom-note{font-size:11px;color:#718795;text-align:center;margin:24px 0}.install-dialog{border:1px solid var(--line);border-radius:12px;max-width:560px;padding:24px;color:var(--ink);box-shadow:0 12px 70px #19324440}.install-dialog::backdrop{background:#19324480}.install-dialog li{margin-bottom:10px}.install-dialog a{color:var(--blue)}.install-dialog h2{font-size:22px}dl{display:grid;grid-template-columns:180px 1fr;gap:8px;font-size:14px}dt{font-weight:bold}dd{margin:0}a{color:var(--blue)}
@@ -26,7 +89,7 @@
 <body>
 <header class="top"><svg class="mark" viewBox="0 0 44 54" fill="none" aria-hidden="true"><path d="M22 3C18 12 5 25 5 34a17 17 0 0 0 34 0C39 25 26 12 22 3Z" stroke="white" stroke-width="2.4"/><path d="m13 34 6 6 13-14" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h1>Guia Estadual de Avaliação do Risco — APPCC</h1><p>Envasadoras de água mineral natural e água natural · Rio de Janeiro</p><span class="version-tag">TESTE E DESENVOLVIMENTO · REVISÃO LEGISLATIVA</span></div></header>
 <div class="workspace">
-<div class="toolbar"><a class="button secondary" href="./html.appc.html">← Menu do guia</a><button onclick="exportFile()">↓ Salvar JSON</button><label class="button secondary">↑ Abrir JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label><button class="secondary" onclick="show('team')">Trabalho em equipe</button><button onclick="printGuide()">▤ Imprimir / PDF</button><button class="secondary" onclick="newGuide()">Novo guia</button><button class="install" id="installButton" data-pwa-install onclick="installGuide()">＋ Instalar no celular</button></div>
+<div class="toolbar"><a class="button secondary" href="./html.appc.html">← Menu do guia</a><button onclick="exportFile()">↓ Salvar JSON</button><label class="button secondary">↑ Abrir JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label><button class="secondary" onclick="show('team')">Trabalho em equipe</button><button onclick="printGuide()">▤ Imprimir / PDF</button><button class="secondary" onclick="newGuide()">Novo guia</button><button class="install" id="installButton" data-pwa-install onclick="window.AppccPWA.install()">＋ Instalar no celular</button></div>
 <p id="saveStatus" class="status" role="status" aria-live="polite"></p>
 <span id="offlineStatus" class="offline">Arquivo independente · preenchimento neste aparelho</span>
 <section class="card identification"><div class="fields"><label>Envasadora<textarea id="meta-co" class="header-text" rows="2" autocomplete="organization"></textarea></label><label>Endereço<textarea id="meta-ad" class="header-text" rows="2" autocomplete="street-address"></textarea></label><label>Data<input id="meta-dt" type="date"></label><label>Tipo<select id="meta-ty"><option>Inspeção</option><option>Reinspeção</option><option>Teste de desenvolvimento</option></select></label></div><p id="globalRisk" class="global-risk"></p></section>
@@ -34,8 +97,8 @@
 <div class="layout"><aside class="side"><nav id="navigation" aria-label="Menu do guia"></nav></aside><main id="main" tabindex="-1"></main></div>
 <p class="bottom-note">Versão experimental. Revisar os requisitos após a publicação do ato normativo definitivo da Anvisa. Guarde uma cópia completa em JSON.</p>
 </div>
-<dialog id="installDialog" class="install-dialog"><h2>Instalar o APPCC Teste</h2><p data-pwa-status role="status">Abra o endereço do guia no navegador do celular.</p><div class="support-tools"><button data-pwa-install onclick="installGuide()">Instalar no celular</button><a class="button secondary" data-pwa-chrome href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" hidden>Abrir no Chrome</a><a class="button secondary" data-pwa-link href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" target="_blank" rel="noopener">Abrir página de instalação</a></div><ol><li><b>Android:</b> no Chrome, toque no menu ⋮, escolha <b>Adicionar à tela inicial</b> e confirme <b>Instalar</b>.</li><li data-pwa-ios hidden><b>iPhone:</b> no Safari, use Compartilhar e <b>Adicionar à Tela de Início</b>.</li><li>Aguarde o navegador concluir e procure <b>APPCC Teste</b> na lista de aplicativos do celular.</li></ol><p class="muted">Se abriu o guia dentro do ChatGPT, WhatsApp ou outro aplicativo, abra este endereço no navegador do celular. Se já preencheu, salve o JSON antes de trocar de navegador.</p><p class="muted">No Android, escolha <b>Instalar</b>. “Criar atalho” coloca um acesso na tela inicial, sem adicionar o guia à lista de apps. O Chrome pode levar cerca de 30 segundos nesta página para oferecer o instalador.</p><details class="installation-checks" open><summary>Verificar a instalação</summary><p class="muted">Esta verificação ajuda a identificar por que o instalador não abriu.</p><div class="buttons support-tools"><button type="button" class="secondary" data-pwa-diagnose>Verificar novamente</button><button type="button" class="secondary" data-pwa-copy disabled>Copiar verificação</button></div><ul data-pwa-checks aria-live="polite"></ul><textarea data-pwa-report hidden readonly rows="8" aria-label="Texto da verificação de instalação"></textarea></details><button class="secondary" onclick="document.getElementById('installDialog').close()">Voltar ao guia</button></dialog>
-<script>'use strict';
+<dialog id="installDialog" class="install-dialog"><h2>Instalar o APPCC Teste</h2><p data-pwa-status role="status">Abra o endereço do guia no navegador do celular.</p><div class="support-tools"><button data-pwa-install onclick="window.AppccPWA.install()">Instalar no celular</button><a class="button secondary" data-pwa-chrome href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" hidden>Abrir no Chrome</a><a class="button secondary" data-pwa-link href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" target="_blank" rel="noopener">Abrir página de instalação</a></div><ol><li><b>Android:</b> no Chrome, toque no menu ⋮, escolha <b>Adicionar à tela inicial</b> e confirme <b>Instalar</b>.</li><li data-pwa-ios hidden><b>iPhone:</b> no Safari, use Compartilhar e <b>Adicionar à Tela de Início</b>.</li><li>Aguarde o navegador concluir e procure <b>APPCC Teste</b> na lista de aplicativos do celular.</li></ol><p class="muted">Se abriu o guia dentro do ChatGPT, WhatsApp ou outro aplicativo, abra este endereço no navegador do celular. Se já preencheu, salve o JSON antes de trocar de navegador.</p><button class="secondary" onclick="document.getElementById('installDialog').close()">Voltar ao guia</button></dialog>
+<script id="appcc-app">'use strict';
 const VERSION='APPCC-DESENV-2026.10.12.8';
 const BASE_MODEL='appcc-ia-modelo-original-20261010-v4';
 const STORAGE_KEY='guia-appcc-desenvolvimento-v1';
@@ -4147,123 +4210,8 @@ function renderPCC(){
  return '<section class="card"><h2>Considerandos dos PCC</h2><p>O texto é montado a partir das frases PCC que não atendem. Edite o modelo com os campos {item}, {processo} e {foco}.</p>'+Object.keys(NOVOS).filter(c=>NOVOS[c].phrases.some((f,j)=>phraseClass(c,j)==='PCC')).map(c=>'<div class="config-item">'+textArea('Modelo do indicador '+displayCode(c),S.pccTemplates[c]||PCC_TEMPLATE,"S.pccTemplates['"+c+"']=this.value;save()")+'<button type="button" class="secondary restore-original" onclick="restorePCCModel(\''+c+'\')">Restaurar original</button></div>').join('')+'</section><section class="card"><h2>Constatações geradas neste preenchimento</h2>'+(pccRows().map(row=>'<div class="config-item">'+(row.changed?'<p class="notice">A avaliação mudou. Revise esta constatação personalizada.</p>':'')+textArea('Constatação',row.text,"S.pccDrafts['"+row.id+"']={text:this.value,base:"+e(JSON.stringify(row.base))+"};save()")+'<button type="button" class="secondary restore-original" onclick="restorePCCStatement(\''+row.id+'\')">Restaurar original</button></div>').join('')||'<p class="muted">Nenhuma frase PCC foi registrada como NÃO até o momento.</p>')+'</section>';
 }
 
-function renderLaws(){return '<section class="card"><h2>Legislação e versão do guia</h2><p class="notice"><b>Versão experimental para teste e desenvolvimento.</b> As frases da proposta de consulta pública deverão ser conferidas e ajustadas quando a Anvisa publicar o ato normativo definitivo.</p><dl><dt>Versão do aplicativo</dt><dd>'+VERSION+'</dd><dt>Conteúdo de referência</dt><dd>82 indicadores e 161 frases da tabela de revisão recebida; '+supportCatalog().length+' documentos de apoio cadastrados. Os textos podem combinar requisitos de referências distintas.</dd><dt>Escopo</dt><dd>Envasadoras de água mineral natural e de água natural. A proposta federal abrange outras categorias; esta versão mantém o escopo do guia estadual.</dd></dl><div class="table-scroll"><table><thead><tr><th>Referência</th><th>Uso nesta versão</th><th>Fonte</th></tr></thead><tbody><tr><td>CP Anvisa 1.365/2025</td><td>Proposta de revisão utilizada nos testes. As frases não são apresentadas como ato definitivo.</td><td><a href="https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=8499&cod_modulo=293&link=S&numeroAto=00001365&orgao=DC%2FANVISA%2FMS&seqAto=000&tipo=CPB&valorAno=2025" target="_blank" rel="noopener">Anvisa Legis</a></td></tr><tr><td>Resolução ANM 193/2024</td><td>Referências técnicas da tabela revisada, com o artigo indicado por frase.</td><td><a href="https://www.gov.br/anm/pt-br/assuntos/noticias/novas-regras-para-aproveitamento-de-aguas-minerais-e-potaveis" target="_blank" rel="noopener">ANM</a></td></tr><tr><td>RDC Anvisa 173/2006</td><td>Correspondência com os itens do guia anterior. A menção histórica não declara revogação pela consulta pública.</td><td>Tabela de revisão recebida</td></tr><tr><td>Portaria SUVISA / referências complementares</td><td>Preservadas conforme a tabela recebida. Número, artigo e redação poderão ser conferidos no editor de referências.</td><td>Tabela de revisão recebida</td></tr></tbody></table></div><h3>Uso e salvamento</h3><p>O preenchimento fica neste navegador. Use “Salvar JSON” para guardar uma cópia completa e “Abrir JSON” para continuar em outro aparelho. O HTML pode ser aberto diretamente. A instalação no celular usa o endereço hospedado com conexão segura; depois do primeiro acesso, o aplicativo fica disponível offline.</p><button class="secondary" data-pwa-install onclick="installGuide()">Instalar no celular</button></section>';}
-window.AppccPWA=(()=>{
- const root='https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/';
- const installURL=root+'html.appcc.cel.html';
- let promptEvent=null,busy=false,initialized=false,requested=false,checking=false,lastChecks=[];
- const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||window.matchMedia?.('(display-mode: fullscreen)').matches||navigator.standalone);
- const android=()=>/Android/i.test(navigator.userAgent||'');
- const ios=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent||'')||navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1;
- const embedded=()=>/; wv\)|\bwv\b|FBAN|FBAV|Instagram|Line\/|ChatGPT/i.test(navigator.userAgent||'');
- const chrome=()=>android()&&/Chrome\//i.test(navigator.userAgent||'')&&!/EdgA|OPR\/|SamsungBrowser|Firefox/i.test(navigator.userAgent||'')&&!embedded();
- function chromeURL(){const url=new URL(installURL);return 'intent://'+url.host+url.pathname+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url.href)+';end';}
- function message(text){document.querySelectorAll('[data-pwa-status]').forEach(el=>el.textContent=text);}
- function refresh(){
-  const text=standalone()?'Ver instalação no celular':busy?'Abrindo instalador…':promptEvent?'Instalar aplicativo':requested?'Instalação solicitada':'Instalar no celular';
-  document.querySelectorAll('[data-pwa-install]').forEach(el=>{el.textContent=text;el.disabled=busy;});
- }
- function links(){
-  document.querySelectorAll('[data-pwa-chrome]').forEach(el=>{el.href=chromeURL();el.hidden=!android();});
-  document.querySelectorAll('[data-pwa-link]').forEach(el=>el.href=installURL);
-  document.querySelectorAll('[data-pwa-ios]').forEach(el=>el.hidden=!ios());
- }
- function showHelp(){
-  links();const dialog=document.getElementById('installDialog'),help=document.getElementById('installHelp');
-  if(dialog&&!dialog.open){if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');}
-  if(help){help.hidden=false;help.scrollIntoView?.({behavior:'smooth',block:'start'});}
- }
- function renderChecks(){
-  const rows=[...lastChecks.filter(row=>row.key!=='prompt'),{key:'prompt',ok:promptEvent?true:null,text:promptEvent?'Instalador pronto: toque em Instalar aplicativo.':requested?'Instalação solicitada: aguarde o navegador concluir.':standalone()?'Guia em janela própria. Confira APPCC Teste na lista de aplicativos.':'Aguardando o instalador do navegador.'}];
-  document.querySelectorAll('[data-pwa-checks]').forEach(list=>{list.textContent='';rows.forEach(row=>{const li=document.createElement('li');li.textContent=(row.ok?'✓ ':row.ok===false?'! ':'• ')+row.text;list.appendChild(li);});});
-  document.querySelectorAll('[data-pwa-copy]').forEach(button=>button.disabled=!lastChecks.length);
-  return rows;
- }
- function report(){return ['Guia APPCC — verificação de instalação','Endereço: '+location.href,...renderChecks().map(row=>row.text)].join('\n');}
- async function resource(path){
-  const url=new URL(path,root);if(url.origin!==new URL(root).origin||!url.pathname.startsWith(new URL(root).pathname))throw Error('Arquivo fora da pasta do aplicativo.');
-  const controller=typeof AbortController==='function'?new AbortController():null,timer=controller?setTimeout(()=>controller.abort(),12000):null;
-  try{const response=await fetch(url.href,{cache:'no-store',signal:controller?.signal});if(!response.ok)throw Error('HTTP '+response.status);return response;}finally{if(timer)clearTimeout(timer);}
- }
- async function diagnose(){
-  if(checking)return;checking=true;document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.disabled=true);
-  const rows=[],add=(key,ok,text)=>{rows.push({key,ok,text});lastChecks=rows.slice();renderChecks();};
-  try{
-   add('secure',location.protocol==='https:',location.protocol==='https:'?'Endereço seguro disponível.':'Abra o endereço online com HTTPS para instalar.');
-   add('browser',android()?(chrome()?true:embedded()?false:null):ios()?null:true,embedded()?'Página aberta dentro de outro aplicativo: use Abrir no Chrome.':chrome()?'Chrome para Android: pode instalar na lista de aplicativos.':android()?'Use o Chrome para instalar na lista de aplicativos.':ios()?'No iPhone, use o Safari e Adicionar à Tela de Início.':'No computador, use a opção de instalação do navegador.');
-   if(location.protocol!=='https:'){add('prompt',null,'');return;}
-   let manifest;
-   try{
-    manifest=await (await resource('manifest-appcc.webmanifest')).json();
-    const base=new URL('manifest-appcc.webmanifest',root),start=new URL(manifest.start_url,base),scope=new URL(manifest.scope,base);
-    const identity=new URL(manifest.id,start.origin+'/');
-    const valid=(manifest.name||manifest.short_name)&&['standalone','fullscreen','minimal-ui','window-controls-overlay'].includes(manifest.display)&&manifest.prefer_related_applications!==true&&start.origin===base.origin&&scope.origin===base.origin&&start.pathname.startsWith(scope.pathname)&&scope.pathname===new URL(root).pathname&&identity.origin===base.origin&&identity.pathname===new URL(root+'html.appc.html').pathname;
-    if(!valid)throw Error('Identificação ou endereço do aplicativo inválido.');
-    add('manifest',true,'Arquivos de instalação e identidade APPCC Teste disponíveis.');
-    const startResponse=await resource(start.href);if(!/text\/html/i.test(startResponse.headers.get('content-type')||''))throw Error('Página inicial indisponível.');
-    add('start',true,'Menu inicial do aplicativo disponível.');
-   }catch(error){add('manifest',false,'Arquivo de instalação indisponível: '+error.message);}
-   if(manifest){
-    try{
-     for(const size of [192,512]){
-      const icon=(manifest.icons||[]).find(icon=>(icon.sizes||'').split(/\s+/).includes(size+'x'+size)&&(icon.purpose||'any').split(/\s+/).includes('any'));
-      if(!icon)throw Error('Falta o ícone '+size+'×'+size+'.');
-      const response=await resource(icon.src);if(!/image\/png/i.test(response.headers.get('content-type')||''))throw Error('Formato de ícone inválido.');
-      const blob=await response.blob();if(!blob.size)throw Error('Ícone vazio.');
-      if(typeof createImageBitmap==='function'){const bitmap=await createImageBitmap(blob);const valid=bitmap.width===size&&bitmap.height===size;bitmap.close?.();if(!valid)throw Error('Tamanho do ícone inválido.');}
-     }
-     add('icons',true,'Os dois ícones do aplicativo estão disponíveis.');
-    }catch(error){add('icons',false,'Ícone indisponível: '+error.message);}
-   }
-   try{
-    const registration=await navigator.serviceWorker?.getRegistration(root);
-    add('offline',!!registration?.active,registration?.active?'Guia preparado para uso offline.':'Uso offline ainda em preparação. Mantenha a internet e verifique novamente.');
-   }catch(error){add('offline',false,'Não foi possível preparar o uso offline.');}
-   add('prompt',null,'');
-  }finally{checking=false;document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.disabled=false);renderChecks();}
- }
- async function copyReport(){
-  try{await navigator.clipboard.writeText(report());message('Verificação copiada. Você pode colar esse texto para informar o problema de instalação.');}
-  catch(error){document.querySelectorAll('[data-pwa-report]').forEach(el=>{el.hidden=false;el.value=report();el.focus?.();el.select?.();});message('Selecione e copie o texto da verificação.');}
- }
- async function install(){
-  if(standalone()){showHelp();diagnose();message('O guia está em janela própria. Para instalar na lista de aplicativos do Android, confira APPCC Teste em Aplicativos ou use Abrir no Chrome.');return;}
-  if(busy)return;
-  if(!promptEvent){
-   showHelp();diagnose();
-   message(location.protocol==='file:'?'Para instalar, abra a versão online no navegador do celular.':ios()?'No Safari, toque em Compartilhar e em Adicionar à Tela de Início.':chrome()?'Fique cerca de 30 segundos nesta página. Quando o botão mudar para Instalar aplicativo, toque novamente. Você também pode usar ⋮ → Adicionar à tela inicial → Instalar.':android()?'Use Abrir no Chrome para instalar na lista de aplicativos. Um atalho da tela inicial não aparece na lista de apps.':'Use o menu do navegador para instalar o aplicativo. O botão abrirá o instalador quando ele estiver disponível.');
-   return;
-  }
-  const event=promptEvent;promptEvent=null;busy=true;refresh();
-  try{
-   const result=await event.prompt(),choice=event.userChoice?await event.userChoice:result;
-   if(choice?.outcome==='accepted'){requested=true;message('Instalação solicitada. Aguarde o Chrome concluir e procure APPCC Teste na lista de aplicativos do celular.');}
-   else{requested=false;showHelp();message('A instalação foi cancelada. Você pode instalar pelo menu do navegador quando quiser.');}
-  }catch(err){requested=false;showHelp();message('O navegador não abriu o instalador. Use as opções de instalação abaixo.');}
-  finally{busy=false;refresh();renderChecks();}
- }
- function offlineReady(){const el=document.getElementById('offlineStatus');if(el)el.textContent='Acesso offline disponível';lastChecks=lastChecks.map(row=>row.key==='offline'?{key:'offline',ok:true,text:'Guia preparado para uso offline.'}:row);renderChecks();if(!promptEvent&&!requested&&!standalone())message(chrome()?'Guia preparado para uso offline. Aguarde o instalador do Chrome ou use ⋮ → Adicionar à tela inicial → Instalar.':'Guia preparado para uso offline. Para instalar, use o botão ou o menu do navegador.');}
- function init(){
-  links();refresh();if(initialized)return;initialized=true;
-  document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.addEventListener('click',diagnose));
-  document.querySelectorAll('[data-pwa-copy]').forEach(button=>button.addEventListener('click',copyReport));
-  if(standalone())message('Guia aberto em janela própria. Confira o ícone APPCC Teste na lista de aplicativos.');
-  else if(location.protocol==='file:')message('Arquivo local: abra a versão online no navegador para instalar.');
-  if(location.protocol==='https:'&&'serviceWorker' in navigator){
-   navigator.serviceWorker.register('./sw-appcc.js',{scope:'./',updateViaCache:'none'}).then(reg=>{
-    if(reg.active)offlineReady();const worker=reg.installing||reg.waiting;
-    worker?.addEventListener('statechange',()=>{if(worker.state==='activated')offlineReady();});
-    reg.update?.().catch(()=>{});
-   }).catch(()=>{const el=document.getElementById('offlineStatus');if(el)el.textContent='Acesso online — salve uma cópia em JSON';message('O acesso offline ainda não foi preparado. Mantenha a conexão e abra novamente no navegador.');});
-   navigator.serviceWorker.addEventListener?.('controllerchange',offlineReady);
-  }
-  if(document.getElementById('installHelp'))diagnose();
- }
- window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;refresh();renderChecks();message('Instalador pronto. Toque em Instalar aplicativo e confirme a instalação no navegador.');});
- window.addEventListener('appinstalled',()=>{promptEvent=null;requested=true;refresh();renderChecks();message('Instalação solicitada. Aguarde o navegador concluir e procure APPCC Teste na lista de aplicativos.');});
- window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',()=>{refresh();if(standalone())message('Aplicativo aberto pelo ícone da tela inicial.');});
- return {init,install,chromeURL,isStandalone:standalone,diagnose,report,copyReport};
-})();
+function renderLaws(){return '<section class="card"><h2>Legislação e versão do guia</h2><p class="notice"><b>Versão experimental para teste e desenvolvimento.</b> As frases da proposta de consulta pública deverão ser conferidas e ajustadas quando a Anvisa publicar o ato normativo definitivo.</p><dl><dt>Versão do aplicativo</dt><dd>'+VERSION+'</dd><dt>Conteúdo de referência</dt><dd>82 indicadores e 161 frases da tabela de revisão recebida; '+supportCatalog().length+' documentos de apoio cadastrados. Os textos podem combinar requisitos de referências distintas.</dd><dt>Escopo</dt><dd>Envasadoras de água mineral natural e de água natural. A proposta federal abrange outras categorias; esta versão mantém o escopo do guia estadual.</dd></dl><div class="table-scroll"><table><thead><tr><th>Referência</th><th>Uso nesta versão</th><th>Fonte</th></tr></thead><tbody><tr><td>CP Anvisa 1.365/2025</td><td>Proposta de revisão utilizada nos testes. As frases não são apresentadas como ato definitivo.</td><td><a href="https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&cod_menu=8499&cod_modulo=293&link=S&numeroAto=00001365&orgao=DC%2FANVISA%2FMS&seqAto=000&tipo=CPB&valorAno=2025" target="_blank" rel="noopener">Anvisa Legis</a></td></tr><tr><td>Resolução ANM 193/2024</td><td>Referências técnicas da tabela revisada, com o artigo indicado por frase.</td><td><a href="https://www.gov.br/anm/pt-br/assuntos/noticias/novas-regras-para-aproveitamento-de-aguas-minerais-e-potaveis" target="_blank" rel="noopener">ANM</a></td></tr><tr><td>RDC Anvisa 173/2006</td><td>Correspondência com os itens do guia anterior. A menção histórica não declara revogação pela consulta pública.</td><td>Tabela de revisão recebida</td></tr><tr><td>Portaria SUVISA / referências complementares</td><td>Preservadas conforme a tabela recebida. Número, artigo e redação poderão ser conferidos no editor de referências.</td><td>Tabela de revisão recebida</td></tr></tbody></table></div><h3>Uso e salvamento</h3><p>O preenchimento fica neste navegador. Use “Salvar JSON” para guardar uma cópia completa e “Abrir JSON” para continuar em outro aparelho. O HTML pode ser aberto diretamente. A instalação no celular usa o endereço hospedado com conexão segura; depois do primeiro acesso, o aplicativo fica disponível offline.</p><button class="secondary" data-pwa-install onclick="window.AppccPWA.install()">Instalar no celular</button></section>';}
+
 
 function installGuide(){return window.AppccPWA.install();}
 function setupPWA(){window.AppccPWA.init();}

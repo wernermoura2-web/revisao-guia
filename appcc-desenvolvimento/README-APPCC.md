@@ -27,4 +27,6 @@ A revisão 2026.10.12.7 ajusta as linhas de observação do Controle de Qualidad
 
 A revisão 2026.10.12.8 remove os blocos de referência legal do fim das descrições impressas, preservando as referências no formulário e no editor. Amplia as observações por indicador no Controle de Qualidade (72% da largura da tabela) e reserva espaço nas observações de retornáveis. Nome e endereço aceitam duas linhas no formulário, na impressão e no PDF editável.
 
-A página de instalação diferencia Instalar aplicativo de Criar atalho e oferece uma verificação copiável do endereço seguro, manifesto, menu, ícones, funcionamento offline e disponibilidade do instalador. No Chrome para Android, o instalador pode depender de interação e cerca de 30 segundos na página. O cache recarrega os arquivos atualizados na preparação offline. A criação do aplicativo na lista de apps depende da conclusão da instalação pelo navegador do celular.
+O cache recarrega os arquivos atualizados na preparação offline. A criação do aplicativo na lista de apps depende da conclusão da instalação pelo navegador do celular.
+
+A revisão de instalação 9 segue o fluxo do AMESC: captura o evento nativo em um script independente no cabeçalho, antes do código do guia; o botão chama prompt() diretamente durante o toque; o manifesto é solicitado com versão para atualizar a cópia do navegador. A tela de instalação tem um botão principal e apresenta ajuda apenas quando o navegador não disponibiliza a janela nativa. O conteúdo, o PDF, o preenchimento e a impressão do guia permanecem iguais à revisão 2026.10.12.8.

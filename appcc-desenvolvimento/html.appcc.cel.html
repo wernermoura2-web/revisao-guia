@@ -1,119 +1,67 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075a9c"><link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest"><link rel="apple-touch-icon" href="./icon-appcc-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Guia APPCC"><title>Guia APPCC — instalar no celular</title><style>*{box-sizing:border-box}body{margin:0;font:16px/1.5 Arial,sans-serif;background:#edf3f7;color:#193244}header{background:#075a9c;color:white;padding:24px 20px}header>div,main{max-width:780px;margin:auto}header h1{font-size:22px;line-height:1.3;margin:0 0 7px}header p{font-size:13px;margin:0;opacity:.95}.tag{display:inline-block;border:1px solid #ffffff66;padding:2px 8px;font-size:11px;border-radius:4px;margin-top:10px}main{padding:28px 18px}h2{font-size:24px;margin:0 0 12px}p{margin:12px 0}.muted{color:#61798a;font-size:14px}.options{display:grid;gap:15px;margin:24px 0}.option{display:grid;grid-template-columns:42px 1fr 22px;gap:14px;align-items:center;min-height:112px;width:100%;padding:20px;border:1px solid #c3d7e5;border-radius:10px;background:white;color:#193244;text-decoration:none;box-shadow:0 3px 10px #14395108}.option strong{display:block;font-size:19px;color:#075a9c}.option small{display:block;font-size:14px;line-height:1.5;color:#61798a;margin-top:5px}.number{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#e3eef6;color:#075a9c;font-size:18px;font-weight:bold}.button,button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:12px 17px;border:0;border-radius:7px;background:#075a9c;color:white;font:700 15px Arial;cursor:pointer;text-decoration:none}.secondary{background:white;border:1px solid #b2cadb;color:#075a9c}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}a:focus-visible,button:focus-visible{outline:3px solid #e1a417;outline-offset:3px}.notice{font-size:13px;color:#6b5525;background:#fff7df;border:1px solid #e4d296;border-left:4px solid #c99829;padding:12px;border-radius:5px}.card{background:white;border:1px solid #c9d9e4;border-radius:10px;padding:20px}.status{font-size:13px;color:#526b7c}li{margin:12px 0}iframe{width:100%;height:75vh;border:1px solid #c9d9e4;border-radius:8px;background:white}footer{max-width:780px;margin:auto;padding:10px 18px 28px;color:#718795;font-size:12px}@media(max-width:650px){header{padding:18px 14px}header h1{font-size:19px}main{padding:24px 12px}h2{font-size:21px}.option{padding:16px;gap:9px;grid-template-columns:38px 1fr 18px}.option strong{font-size:17px}.option small{font-size:13px}.pdf-preview{display:none}}@media(display-mode:standalone){.install-intro{display:none}}</style><style>[hidden]{display:none!important}</style></head><body><header><div><h1>Guia APPCC de 22 páginas</h1><p>Envasadoras de água mineral natural e água natural · Rio de Janeiro</p><span class="tag">TESTE E DESENVOLVIMENTO · REVISÃO LEGISLATIVA</span></div></header><main><h2>Instalar o guia no celular</h2><p class="muted install-intro">Abra este endereço no navegador do celular. A instalação usa o mesmo guia e mantém o preenchimento neste aparelho.</p><div class="buttons"><button data-pwa-install onclick="installApp()">Instalar no celular</button><a class="button secondary" href="./html.appc.html">← Menu do guia</a></div><section class="card" id="installHelp"><h3>Instalar na lista de aplicativos</h3><p>Se estiver dentro do ChatGPT, WhatsApp ou outro aplicativo, abra esta página no navegador do celular.</p><div class="buttons"><a class="button secondary" data-pwa-chrome href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" hidden>Abrir no Chrome</a><a class="button secondary" data-pwa-link href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html" target="_blank" rel="noopener">Abrir no navegador</a></div><ol><li><b>Android / Chrome:</b> toque no menu ⋮, escolha <b>Adicionar à tela inicial</b> e confirme <b>Instalar</b>. Fique cerca de 30 segundos na página e toque em <b>Instalar aplicativo</b> quando esse texto aparecer no botão.</li><li data-pwa-ios hidden><b>iPhone / Safari:</b> toque em Compartilhar e depois em <b>Adicionar à Tela de Início</b>.</li><li>Aguarde a instalação terminar e procure <b>APPCC Teste</b> na <b>lista de aplicativos</b> do celular.</li></ol><p><b>Se aparecer “Criar atalho”:</b> o navegador está oferecendo um atalho de tela inicial. Para ter o ícone na lista de apps do Android, escolha <b>Instalar</b> no Chrome. Se essa opção não aparecer, copie a verificação abaixo para informar o problema.</p><details class="installation-checks" open><summary>Verificar a instalação</summary><p class="muted">Esta verificação ajuda a identificar por que o instalador não abriu.</p><div class="buttons support-tools"><button type="button" class="secondary" data-pwa-diagnose>Verificar novamente</button><button type="button" class="secondary" data-pwa-copy disabled>Copiar verificação</button></div><ul data-pwa-checks aria-live="polite"></ul><textarea data-pwa-report hidden readonly rows="8" aria-label="Texto da verificação de instalação"></textarea></details><p class="muted">O preenchimento fica no navegador usado. Salve o JSON antes de trocar de navegador e abra esse JSON para continuar. Após o primeiro acesso com internet, o guia fica disponível offline.</p></section><p id="appStatus" data-pwa-status class="status" role="status">Preparando o acesso offline...</p></main><footer>Versão experimental. Revise as referências quando a Anvisa publicar o ato normativo definitivo. Guarde uma cópia do preenchimento em JSON.</footer><script>window.AppccPWA=(()=>{
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075a9c"><link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=9">
+<script id="appcc-install">window.AppccPWA=(()=>{
+ 'use strict';
  const root='https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/';
- const installURL=root+'html.appcc.cel.html';
- let promptEvent=null,busy=false,initialized=false,requested=false,checking=false,lastChecks=[];
- const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||window.matchMedia?.('(display-mode: fullscreen)').matches||navigator.standalone);
+ const installURL=root+'html.appcc.cel.html?v=9';
+ let promptEvent=null,busy=false,requested=false,completed=false,initialized=false,offline=false;
+ const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true);
  const android=()=>/Android/i.test(navigator.userAgent||'');
  const ios=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent||'')||navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1;
- const embedded=()=>/; wv\)|\bwv\b|FBAN|FBAV|Instagram|Line\/|ChatGPT/i.test(navigator.userAgent||'');
- const chrome=()=>android()&&/Chrome\//i.test(navigator.userAgent||'')&&!/EdgA|OPR\/|SamsungBrowser|Firefox/i.test(navigator.userAgent||'')&&!embedded();
- function chromeURL(){const url=new URL(installURL);return 'intent://'+url.host+url.pathname+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url.href)+';end';}
+ function chromeURL(){const url=new URL(installURL);return 'intent://'+url.host+url.pathname+url.search+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url.href)+';end';}
  function message(text){document.querySelectorAll('[data-pwa-status]').forEach(el=>el.textContent=text);}
  function refresh(){
-  const text=standalone()?'Ver instalação no celular':busy?'Abrindo instalador…':promptEvent?'Instalar aplicativo':requested?'Instalação solicitada':'Instalar no celular';
-  document.querySelectorAll('[data-pwa-install]').forEach(el=>{el.textContent=text;el.disabled=busy;});
- }
- function links(){
+  document.querySelectorAll('[data-pwa-install]').forEach(el=>{el.hidden=standalone()||completed;el.disabled=busy;el.textContent=busy?'Abrindo instalador…':'Instalar no celular';});
   document.querySelectorAll('[data-pwa-chrome]').forEach(el=>{el.href=chromeURL();el.hidden=!android();});
   document.querySelectorAll('[data-pwa-link]').forEach(el=>el.href=installURL);
   document.querySelectorAll('[data-pwa-ios]').forEach(el=>el.hidden=!ios());
+  const status=document.getElementById('offlineStatus');if(status&&offline)status.textContent='Acesso offline disponível';
  }
  function showHelp(){
-  links();const dialog=document.getElementById('installDialog'),help=document.getElementById('installHelp');
+  refresh();const dialog=document.getElementById('installDialog'),help=document.getElementById('installHelp');
   if(dialog&&!dialog.open){if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');}
   if(help){help.hidden=false;help.scrollIntoView?.({behavior:'smooth',block:'start'});}
- }
- function renderChecks(){
-  const rows=[...lastChecks.filter(row=>row.key!=='prompt'),{key:'prompt',ok:promptEvent?true:null,text:promptEvent?'Instalador pronto: toque em Instalar aplicativo.':requested?'Instalação solicitada: aguarde o navegador concluir.':standalone()?'Guia em janela própria. Confira APPCC Teste na lista de aplicativos.':'Aguardando o instalador do navegador.'}];
-  document.querySelectorAll('[data-pwa-checks]').forEach(list=>{list.textContent='';rows.forEach(row=>{const li=document.createElement('li');li.textContent=(row.ok?'✓ ':row.ok===false?'! ':'• ')+row.text;list.appendChild(li);});});
-  document.querySelectorAll('[data-pwa-copy]').forEach(button=>button.disabled=!lastChecks.length);
-  return rows;
- }
- function report(){return ['Guia APPCC — verificação de instalação','Endereço: '+location.href,...renderChecks().map(row=>row.text)].join('\n');}
- async function resource(path){
-  const url=new URL(path,root);if(url.origin!==new URL(root).origin||!url.pathname.startsWith(new URL(root).pathname))throw Error('Arquivo fora da pasta do aplicativo.');
-  const controller=typeof AbortController==='function'?new AbortController():null,timer=controller?setTimeout(()=>controller.abort(),12000):null;
-  try{const response=await fetch(url.href,{cache:'no-store',signal:controller?.signal});if(!response.ok)throw Error('HTTP '+response.status);return response;}finally{if(timer)clearTimeout(timer);}
- }
- async function diagnose(){
-  if(checking)return;checking=true;document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.disabled=true);
-  const rows=[],add=(key,ok,text)=>{rows.push({key,ok,text});lastChecks=rows.slice();renderChecks();};
-  try{
-   add('secure',location.protocol==='https:',location.protocol==='https:'?'Endereço seguro disponível.':'Abra o endereço online com HTTPS para instalar.');
-   add('browser',android()?(chrome()?true:embedded()?false:null):ios()?null:true,embedded()?'Página aberta dentro de outro aplicativo: use Abrir no Chrome.':chrome()?'Chrome para Android: pode instalar na lista de aplicativos.':android()?'Use o Chrome para instalar na lista de aplicativos.':ios()?'No iPhone, use o Safari e Adicionar à Tela de Início.':'No computador, use a opção de instalação do navegador.');
-   if(location.protocol!=='https:'){add('prompt',null,'');return;}
-   let manifest;
-   try{
-    manifest=await (await resource('manifest-appcc.webmanifest')).json();
-    const base=new URL('manifest-appcc.webmanifest',root),start=new URL(manifest.start_url,base),scope=new URL(manifest.scope,base);
-    const identity=new URL(manifest.id,start.origin+'/');
-    const valid=(manifest.name||manifest.short_name)&&['standalone','fullscreen','minimal-ui','window-controls-overlay'].includes(manifest.display)&&manifest.prefer_related_applications!==true&&start.origin===base.origin&&scope.origin===base.origin&&start.pathname.startsWith(scope.pathname)&&scope.pathname===new URL(root).pathname&&identity.origin===base.origin&&identity.pathname===new URL(root+'html.appc.html').pathname;
-    if(!valid)throw Error('Identificação ou endereço do aplicativo inválido.');
-    add('manifest',true,'Arquivos de instalação e identidade APPCC Teste disponíveis.');
-    const startResponse=await resource(start.href);if(!/text\/html/i.test(startResponse.headers.get('content-type')||''))throw Error('Página inicial indisponível.');
-    add('start',true,'Menu inicial do aplicativo disponível.');
-   }catch(error){add('manifest',false,'Arquivo de instalação indisponível: '+error.message);}
-   if(manifest){
-    try{
-     for(const size of [192,512]){
-      const icon=(manifest.icons||[]).find(icon=>(icon.sizes||'').split(/\s+/).includes(size+'x'+size)&&(icon.purpose||'any').split(/\s+/).includes('any'));
-      if(!icon)throw Error('Falta o ícone '+size+'×'+size+'.');
-      const response=await resource(icon.src);if(!/image\/png/i.test(response.headers.get('content-type')||''))throw Error('Formato de ícone inválido.');
-      const blob=await response.blob();if(!blob.size)throw Error('Ícone vazio.');
-      if(typeof createImageBitmap==='function'){const bitmap=await createImageBitmap(blob);const valid=bitmap.width===size&&bitmap.height===size;bitmap.close?.();if(!valid)throw Error('Tamanho do ícone inválido.');}
-     }
-     add('icons',true,'Os dois ícones do aplicativo estão disponíveis.');
-    }catch(error){add('icons',false,'Ícone indisponível: '+error.message);}
-   }
-   try{
-    const registration=await navigator.serviceWorker?.getRegistration(root);
-    add('offline',!!registration?.active,registration?.active?'Guia preparado para uso offline.':'Uso offline ainda em preparação. Mantenha a internet e verifique novamente.');
-   }catch(error){add('offline',false,'Não foi possível preparar o uso offline.');}
-   add('prompt',null,'');
-  }finally{checking=false;document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.disabled=false);renderChecks();}
- }
- async function copyReport(){
-  try{await navigator.clipboard.writeText(report());message('Verificação copiada. Você pode colar esse texto para informar o problema de instalação.');}
-  catch(error){document.querySelectorAll('[data-pwa-report]').forEach(el=>{el.hidden=false;el.value=report();el.focus?.();el.select?.();});message('Selecione e copie o texto da verificação.');}
+  message(location.protocol==='file:'?'Abra a versão online para instalar o APPCC Teste.':ios()?'No Safari, toque em Compartilhar e Adicionar à Tela de Início.':'No Chrome, abra o menu ⋮ e escolha Instalar aplicativo ou Adicionar à tela inicial → Instalar.');
  }
  async function install(){
-  if(standalone()){showHelp();diagnose();message('O guia está em janela própria. Para instalar na lista de aplicativos do Android, confira APPCC Teste em Aplicativos ou use Abrir no Chrome.');return;}
-  if(busy)return;
-  if(!promptEvent){
-   showHelp();diagnose();
-   message(location.protocol==='file:'?'Para instalar, abra a versão online no navegador do celular.':ios()?'No Safari, toque em Compartilhar e em Adicionar à Tela de Início.':chrome()?'Fique cerca de 30 segundos nesta página. Quando o botão mudar para Instalar aplicativo, toque novamente. Você também pode usar ⋮ → Adicionar à tela inicial → Instalar.':android()?'Use Abrir no Chrome para instalar na lista de aplicativos. Um atalho da tela inicial não aparece na lista de apps.':'Use o menu do navegador para instalar o aplicativo. O botão abrirá o instalador quando ele estiver disponível.');
+  if(busy||standalone()||completed)return;
+  if(promptEvent){
+   const event=promptEvent;promptEvent=null;busy=true;
+   try{
+    // Invoke the browser synchronously within this button's user gesture.
+    const opening=event.prompt();refresh();
+    const result=await opening,choice=event.userChoice?await event.userChoice:result;
+    requested=choice?.outcome==='accepted';
+    message(requested?'Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste na lista de aplicativos.':'Instalação cancelada.');
+   }catch(error){requested=false;showHelp();}
+   finally{busy=false;refresh();}
    return;
   }
-  const event=promptEvent;promptEvent=null;busy=true;refresh();
-  try{
-   const result=await event.prompt(),choice=event.userChoice?await event.userChoice:result;
-   if(choice?.outcome==='accepted'){requested=true;message('Instalação solicitada. Aguarde o Chrome concluir e procure APPCC Teste na lista de aplicativos do celular.');}
-   else{requested=false;showHelp();message('A instalação foi cancelada. Você pode instalar pelo menu do navegador quando quiser.');}
-  }catch(err){requested=false;showHelp();message('O navegador não abriu o instalador. Use as opções de instalação abaixo.');}
-  finally{busy=false;refresh();renderChecks();}
+  showHelp();
  }
- function offlineReady(){const el=document.getElementById('offlineStatus');if(el)el.textContent='Acesso offline disponível';lastChecks=lastChecks.map(row=>row.key==='offline'?{key:'offline',ok:true,text:'Guia preparado para uso offline.'}:row);renderChecks();if(!promptEvent&&!requested&&!standalone())message(chrome()?'Guia preparado para uso offline. Aguarde o instalador do Chrome ou use ⋮ → Adicionar à tela inicial → Instalar.':'Guia preparado para uso offline. Para instalar, use o botão ou o menu do navegador.');}
+ function offlineReady(){offline=true;refresh();if(!requested&&!promptEvent)message('Guia disponível offline. Use Instalar no celular para adicionar o aplicativo.');}
  function init(){
-  links();refresh();if(initialized)return;initialized=true;
-  document.querySelectorAll('[data-pwa-diagnose]').forEach(button=>button.addEventListener('click',diagnose));
-  document.querySelectorAll('[data-pwa-copy]').forEach(button=>button.addEventListener('click',copyReport));
-  if(standalone())message('Guia aberto em janela própria. Confira o ícone APPCC Teste na lista de aplicativos.');
-  else if(location.protocol==='file:')message('Arquivo local: abra a versão online no navegador para instalar.');
+  refresh();if(standalone())message('APPCC Teste aberto pelo ícone do aplicativo.');
+  else if(promptEvent)message('Pronto para instalar. Toque em Instalar no celular.');
+  else if(location.protocol==='file:')message('Abra a versão online para instalar.');
+ }
+ // Capture the native installer before the guide's data and rendering code runs.
+ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;completed=false;refresh();message('Pronto para instalar. Toque em Instalar no celular.');});
+ window.addEventListener('appinstalled',()=>{promptEvent=null;requested=true;completed=true;refresh();message('Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste.');});
+ window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',init);
+ function start(){
+  if(initialized)return;initialized=true;
   if(location.protocol==='https:'&&'serviceWorker' in navigator){
-   navigator.serviceWorker.register('./sw-appcc.js',{scope:'./',updateViaCache:'none'}).then(reg=>{
+   navigator.serviceWorker.register(new URL('./sw-appcc.js',document.baseURI),{scope:'./',updateViaCache:'none'}).then(reg=>{
     if(reg.active)offlineReady();const worker=reg.installing||reg.waiting;
     worker?.addEventListener('statechange',()=>{if(worker.state==='activated')offlineReady();});
     reg.update?.().catch(()=>{});
-   }).catch(()=>{const el=document.getElementById('offlineStatus');if(el)el.textContent='Acesso online — salve uma cópia em JSON';message('O acesso offline ainda não foi preparado. Mantenha a conexão e abra novamente no navegador.');});
+   }).catch(()=>{message('Mantenha a conexão para preparar a instalação.');});
    navigator.serviceWorker.addEventListener?.('controllerchange',offlineReady);
   }
-  if(document.getElementById('installHelp'))diagnose();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  }
- window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;refresh();renderChecks();message('Instalador pronto. Toque em Instalar aplicativo e confirme a instalação no navegador.');});
- window.addEventListener('appinstalled',()=>{promptEvent=null;requested=true;refresh();renderChecks();message('Instalação solicitada. Aguarde o navegador concluir e procure APPCC Teste na lista de aplicativos.');});
- window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',()=>{refresh();if(standalone())message('Aplicativo aberto pelo ícone da tela inicial.');});
- return {init,install,chromeURL,isStandalone:standalone,diagnose,report,copyReport};
-})();
+ start();return {init,install,chromeURL,isStandalone:standalone};
+})();</script><link rel="apple-touch-icon" href="./icon-appcc-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Guia APPCC"><title>Guia APPCC — instalar no celular</title><style>*{box-sizing:border-box}body{margin:0;font:16px/1.5 Arial,sans-serif;background:#edf3f7;color:#193244}header{background:#075a9c;color:white;padding:24px 20px}header>div,main{max-width:780px;margin:auto}header h1{font-size:22px;line-height:1.3;margin:0 0 7px}header p{font-size:13px;margin:0;opacity:.95}.tag{display:inline-block;border:1px solid #ffffff66;padding:2px 8px;font-size:11px;border-radius:4px;margin-top:10px}main{padding:28px 18px}h2{font-size:24px;margin:0 0 12px}p{margin:12px 0}.muted{color:#61798a;font-size:14px}.options{display:grid;gap:15px;margin:24px 0}.option{display:grid;grid-template-columns:42px 1fr 22px;gap:14px;align-items:center;min-height:112px;width:100%;padding:20px;border:1px solid #c3d7e5;border-radius:10px;background:white;color:#193244;text-decoration:none;box-shadow:0 3px 10px #14395108}.option strong{display:block;font-size:19px;color:#075a9c}.option small{display:block;font-size:14px;line-height:1.5;color:#61798a;margin-top:5px}.number{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#e3eef6;color:#075a9c;font-size:18px;font-weight:bold}.button,button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:12px 17px;border:0;border-radius:7px;background:#075a9c;color:white;font:700 15px Arial;cursor:pointer;text-decoration:none}.secondary{background:white;border:1px solid #b2cadb;color:#075a9c}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}a:focus-visible,button:focus-visible{outline:3px solid #e1a417;outline-offset:3px}.notice{font-size:13px;color:#6b5525;background:#fff7df;border:1px solid #e4d296;border-left:4px solid #c99829;padding:12px;border-radius:5px}.card{background:white;border:1px solid #c9d9e4;border-radius:10px;padding:20px}.status{font-size:13px;color:#526b7c}li{margin:12px 0}iframe{width:100%;height:75vh;border:1px solid #c9d9e4;border-radius:8px;background:white}footer{max-width:780px;margin:auto;padding:10px 18px 28px;color:#718795;font-size:12px}@media(max-width:650px){header{padding:18px 14px}header h1{font-size:19px}main{padding:24px 12px}h2{font-size:21px}.option{padding:16px;gap:9px;grid-template-columns:38px 1fr 18px}.option strong{font-size:17px}.option small{font-size:13px}.pdf-preview{display:none}}@media(display-mode:standalone){.install-intro{display:none}}</style><style>[hidden]{display:none!important}</style></head><body><header><div><h1>Guia APPCC de 22 páginas</h1><p>Envasadoras de água mineral natural e água natural · Rio de Janeiro</p><span class="tag">TESTE E DESENVOLVIMENTO · REVISÃO LEGISLATIVA</span></div></header><main><h2>Instalar o guia no celular</h2><p class="muted install-intro">Toque no botão e confirme <b>Instalar</b> na janela do navegador.</p><div class="buttons"><button data-pwa-install onclick="window.AppccPWA.install()">Instalar no celular</button><a class="button secondary" href="./html.appc.html">← Menu do guia</a></div><p data-pwa-status class="status" role="status">Preparando a instalação...</p><section class="card" id="installHelp" hidden><h3>Abrir no navegador</h3><p>Se esta página abriu dentro do ChatGPT ou de outro aplicativo, abra no Chrome para instalar.</p><div class="buttons"><a class="button secondary" data-pwa-chrome href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html?v=9" hidden>Abrir no Chrome</a><a class="button secondary" data-pwa-link href="https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appcc.cel.html?v=9" target="_blank" rel="noopener">Abrir no navegador</a></div><p><b>Android / Chrome:</b> menu ⋮ → Instalar aplicativo ou Adicionar à tela inicial → Instalar.</p><p data-pwa-ios hidden><b>iPhone / Safari:</b> Compartilhar → Adicionar à Tela de Início.</p><p class="muted">Salve o JSON antes de trocar de navegador para continuar o mesmo preenchimento.</p></section></main><footer>Versão experimental. Revise as referências quando a Anvisa publicar o ato normativo definitivo. Guarde uma cópia do preenchimento em JSON.</footer><script>
 
 function installApp(){return window.AppccPWA.install();}
 window.AppccPWA.init();</script></body></html>
