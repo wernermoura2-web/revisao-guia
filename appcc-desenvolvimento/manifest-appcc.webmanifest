@@ -4,20 +4,20 @@
   "short_name": "APPCC Teste",
   "description": "Guia experimental de avaliação do risco de envasadoras de água mineral natural e água natural.",
   "lang": "pt-BR",
-  "start_url": "./html.appc.html",
-  "scope": "./",
+  "start_url": "/revisao-guia/appcc-desenvolvimento/html.appc.html",
+  "scope": "/revisao-guia/appcc-desenvolvimento/",
   "display": "standalone",
   "background_color": "#edf3f7",
   "theme_color": "#075a9c",
   "icons": [
     {
-      "src": "./icon-appcc-192.png",
+      "src": "/revisao-guia/appcc-desenvolvimento/icon-appcc-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-appcc-512.png",
+      "src": "/revisao-guia/appcc-desenvolvimento/icon-appcc-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"

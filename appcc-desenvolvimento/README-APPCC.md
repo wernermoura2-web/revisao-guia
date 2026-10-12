@@ -24,3 +24,7 @@ A revisão 2026.10.12.6 fixa as folhas impressas na área A4 para evitar página
 A instalação tem identidade própria APPCC Teste, abertura no Chrome no Android e confirmação pelo instalador do navegador. O cache do aplicativo é preparado separadamente do PDF para que uma falha ao baixar o PDF não impeça a instalação do guia.
 
 A revisão 2026.10.12.7 ajusta as linhas de observação do Controle de Qualidade para manter todas as descrições no modelo de 22 páginas quando medido na largura real A4. Observações extensas continuam sendo preservadas nas páginas de continuação.
+
+A revisão 2026.10.12.8 remove os blocos de referência legal do fim das descrições impressas, preservando as referências no formulário e no editor. Amplia as observações por indicador no Controle de Qualidade (72% da largura da tabela) e reserva espaço nas observações de retornáveis. Nome e endereço aceitam duas linhas no formulário, na impressão e no PDF editável.
+
+A página de instalação diferencia Instalar aplicativo de Criar atalho e oferece uma verificação copiável do endereço seguro, manifesto, menu, ícones, funcionamento offline e disponibilidade do instalador. No Chrome para Android, o instalador pode depender de interação e cerca de 30 segundos na página. O cache recarrega os arquivos atualizados na preparação offline. A criação do aplicativo na lista de apps depende da conclusão da instalação pelo navegador do celular.
