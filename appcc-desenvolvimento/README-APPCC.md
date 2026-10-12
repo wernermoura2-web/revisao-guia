@@ -1,6 +1,6 @@
 # Guia APPCC — revisão legislativa
 
-Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html?v=13
+Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html?v=14
 
 Arquivos:
 
@@ -48,3 +48,9 @@ A atualização de navegação 12 versiona os links do menu, formulário e PDF p
 ## Atualização APPCC — 12/10/2026
 
 Nos processos 2, 3, 4 e 5, o atendimento de 76 a 99% corresponde a 2 MÉDIO (amarelo). Atendimento de 100% permanece 1 BAIXO e até 75% permanece 3 ALTO. Regra aplicada ao cálculo, à matriz e aos modelos de impressão HTML e PDF. Versão 2026.10.12.13.
+
+## PDF integrado — 2026.10.12.14
+
+PDF com S/N/NA, fonte Poço/Surgência, soma de vazões, APPCC e peso editáveis por indicador, documentos condicionais, percentuais e riscos automáticos, matriz dos oito processos e classificação 1/2/3 pelo maior risco. O acesso Abrir PDF permite preencher o próprio PDF no navegador, incluir 48 fotos e nove rótulos, girar as imagens e exportar um PDF com campos editáveis e imagens incorporadas. JSON permite guardar e recuperar o preenchimento local, sem banco de dados.
+
+Instalação usa somente o instalador nativo quando o navegador disponibiliza beforeinstallprompt; os botões permanecem na página e exibem o estado real, sem redirecionar automaticamente. Manifesto exclusivo do APPCC e cache v14.
