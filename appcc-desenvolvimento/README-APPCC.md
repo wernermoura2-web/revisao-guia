@@ -1,6 +1,6 @@
 # Guia APPCC — revisão legislativa
 
-Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html
+Acesso: https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/html.appc.html?v=12
 
 Arquivos:
 
@@ -42,3 +42,5 @@ A impressão usa MODELO PARA IMPRESSÃO no cabeçalho, fonte Poço/Surgência, t
 A classificação do estabelecimento exibe os grupos 1, 2 e 3 com os textos do modelo e seleção automática pelo risco calculado. Fotografias e rótulos têm botão Girar 90° no formulário, nas fotos vinculadas às frases e na prévia de impressão; a rotação da prévia atualiza a imagem no guia. Os controles são ocultados ao imprimir.
 
 O modelo PDF mantém 22 páginas editáveis, resultados conjuntos com prioridade de Não e classificação automática em leitores com suporte a JavaScript de formulários, como Acrobat. No HTML, o cálculo e a classificação ficam disponíveis no navegador e são incorporados ao PDF preenchido gerado pela impressão.
+
+A atualização de navegação 12 versiona os links do menu, formulário e PDF para solicitar a cópia atual ao navegador e ao cache offline. O download usa o nome Guia_APPCC_Risco_Corrigido.pdf. A matriz de conteúdo 2026.10.12.11 classifica a faixa 76-99% dos processos 2, 3, 4 e 5 como 3 ALTO, em vermelho.

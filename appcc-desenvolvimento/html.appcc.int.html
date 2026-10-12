@@ -9,11 +9,11 @@
 <meta name="apple-mobile-web-app-title" content="Guia APPCC">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>Guia APPCC</title>
-<link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=11">
+<link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=12">
 <script id="appcc-install">window.AppccPWA=(()=>{
  'use strict';
  const root='https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/';
- const menuURL=root+'html.appc.html?v=11';
+ const menuURL=root+'html.appc.html?v=12';
  const requestedURL=menuURL+'&install=1';
  let promptEvent=null,busy=false,completed=false,requested=false,offline=false,waiting=new URL(location.href||menuURL).searchParams.get('install')==='1';
  const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true);
@@ -96,7 +96,7 @@
 <body>
 <header class="top"><svg class="mark" viewBox="0 0 44 54" fill="none" aria-hidden="true"><path d="M22 3C18 12 5 25 5 34a17 17 0 0 0 34 0C39 25 26 12 22 3Z" stroke="white" stroke-width="2.4"/><path d="m13 34 6 6 13-14" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h1>Guia Estadual de Avaliação do Risco — APPCC</h1><p>Envasadoras de água mineral natural e água natural · Rio de Janeiro</p><span class="version-tag">REVISÃO LEGISLATIVA</span></div></header>
 <div class="workspace">
-<div class="toolbar"><a class="button secondary" href="./html.appc.html">← Menu do guia</a><button onclick="exportFile()">↓ Salvar JSON</button><label class="button secondary">↑ Abrir JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label><button class="secondary" onclick="show('team')">Trabalho em equipe</button><button onclick="printGuide()">▤ Imprimir / PDF</button><button class="secondary" onclick="newGuide()">Novo guia</button><button class="install" id="installButton" data-pwa-install onclick="window.AppccPWA.install()">＋ Instalar no celular</button></div>
+<div class="toolbar"><a class="button secondary" href="./html.appc.html?v=12">← Menu do guia</a><button onclick="exportFile()">↓ Salvar JSON</button><label class="button secondary">↑ Abrir JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label><button class="secondary" onclick="show('team')">Trabalho em equipe</button><button onclick="printGuide()">▤ Imprimir / PDF</button><button class="secondary" onclick="newGuide()">Novo guia</button><button class="install" id="installButton" data-pwa-install onclick="window.AppccPWA.install()">＋ Instalar no celular</button></div>
 <p id="saveStatus" class="status" role="status" aria-live="polite"></p>
 <span id="offlineStatus" class="offline">Arquivo independente · preenchimento neste aparelho</span>
 <section class="card identification"><div class="fields"><label>Envasadora<textarea id="meta-co" class="header-text" rows="2" autocomplete="organization"></textarea></label><label>Endereço<textarea id="meta-ad" class="header-text" rows="2" autocomplete="street-address"></textarea></label><label>Data<input id="meta-dt" type="date"></label><label>Tipo<select id="meta-ty"><option>Inspeção</option><option>Reinspeção</option><option>Teste de desenvolvimento</option></select></label></div><p id="globalRisk" class="global-risk"></p></section>
