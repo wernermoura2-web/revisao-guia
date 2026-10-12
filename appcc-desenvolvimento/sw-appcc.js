@@ -1,4 +1,4 @@
-const CACHE='guia-appcc-desenvolvimento-github-v1';
+const CACHE='guia-appcc-desenvolvimento-github-v2';
 const CORE=["./html.appc.html", "./html.appcc.int.html", "./html.appcc.pdf.html", "./html.appcc.cel.html", "./Guia_APPCC_22_Paginas.pdf", "./manifest-appcc.webmanifest", "./icon-appcc-192.png", "./icon-appcc-512.png"];
 const ALLOWED_PATHS=new Set(CORE.map(path=>new URL(path,self.location.href).pathname));
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE))));
