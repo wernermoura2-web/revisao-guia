@@ -2,7 +2,7 @@
 (function(){
  'use strict';
  const key='appcc-pdf-revisao-v1',version=14;
- let metadata,bytes,documentPDF,pdfjs,renderTask,values={},photos={},pageNo=1,renderSerial=0,busy=false;
+ let metadata,bytes,templateBytes,documentPDF,pdfjs,renderTask,values={},photos={},pageNo=1,renderSerial=0,busy=false;
  const byId=id=>document.getElementById(id),msg=t=>byId('pdfStatus').textContent=t;
  const titles=['Captação','Condução','Reservatórios da captação 1','Reservatórios da captação 2','Reservatórios da captação 3','Reservatórios da captação 4','Recepção','Higienização de retornáveis','Higienização de descartáveis','Envase de retornáveis','Envase de descartáveis','Controle de qualidade','Responsabilidade','Observações gerais','Documentos legais','Fotos','Fotos — continuação','Matriz de risco','Ações e responsáveis','Rótulos','Rótulos — continuação','Rótulos — continuação'];
  const download=(name,data,type)=>{const u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),30000);};
@@ -72,7 +72,7 @@
   try{
    if(!metadata){
     const [meta,pdf,library]=await Promise.all([fetch('./pdf-appcc-campos.json?v=14').then(r=>{if(!r.ok)throw Error('Não foi possível abrir os campos do PDF.');return r.json();}),fetch('./Guia_APPCC_22_Paginas.pdf?v=14').then(r=>{if(!r.ok)throw Error('Não foi possível abrir o PDF.');return r.arrayBuffer();}),import('./pdfjs-appcc.mjs?v=14')]);
-    metadata=meta;bytes=new Uint8Array(pdf);pdfjs=library;pdfjs.GlobalWorkerOptions.workerSrc='./pdfjs-appcc.worker.mjs?v=14';values={...meta.defaults};
+    metadata=meta;bytes=new Uint8Array(pdf);templateBytes=bytes.slice();pdfjs=library;pdfjs.GlobalWorkerOptions.workerSrc='./pdfjs-appcc.worker.mjs?v=14';values={...meta.defaults};
     try{const saved=JSON.parse(localStorage.getItem(key));if(saved?.format==='guia-appcc-pdf'&&saved.version===version){for(const n of Object.keys(values))if(typeof saved.values?.[n]==='string')values[n]=saved.values[n];photos=validPhotos(saved.photos);}}catch(e){}
     documentPDF=await pdfjs.getDocument({data:bytes.slice(),isEvalSupported:false}).promise;update();
     byId('pdfPage').replaceChildren(...titles.map((t,i)=>{const o=document.createElement('option');o.value=String(i+1);o.textContent=(i+1)+' · '+t;return o;}));
@@ -126,7 +126,8 @@
     incomingPdf=await pdfjs.getDocument({data:content.slice(),isEvalSupported:false}).promise;incomingBytes=content;saved.photos=await recoverImages(incomingPdf,f,saved);
    }else saved=JSON.parse(await file.text());
    if(saved?.format!=='guia-appcc-pdf'||saved.version!==version||!saved.values)throw Error('Use um JSON ou PDF deste guia PDF editável.');
-   values={...metadata.defaults};for(const n of Object.keys(values))if(typeof saved.values[n]==='string')values[n]=saved.values[n];photos=validPhotos(saved.photos);if(incomingPdf){documentPDF=incomingPdf;bytes=incomingBytes;}update();persist();await render();msg('Preenchimento aberto. Respostas, cálculos e imagens foram recuperados.');
+   if(!incomingPdf){incomingBytes=templateBytes.slice();incomingPdf=await pdfjs.getDocument({data:incomingBytes.slice(),isEvalSupported:false}).promise;}
+   values={...metadata.defaults};for(const n of Object.keys(values))if(typeof saved.values[n]==='string')values[n]=saved.values[n];photos=validPhotos(saved.photos);if(incomingPdf){const previous=documentPDF;if(renderTask){renderTask.cancel();renderTask=null;}renderSerial++;documentPDF=incomingPdf;bytes=incomingBytes;if(previous&&previous!==incomingPdf)previous.destroy().catch(()=>{});}update();persist();await render();msg('Preenchimento aberto. Respostas, cálculos e imagens foram recuperados.');
   }catch(e){msg('O arquivo não foi aberto: '+e.message);}
  }
  byId('pdfOpen').addEventListener('click',open);byId('pdfExport').addEventListener('click',exportPDF);
