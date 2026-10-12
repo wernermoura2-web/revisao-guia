@@ -1,7 +1,7 @@
 {
-  "id": "./",
+  "id": "/revisao-guia/appcc-desenvolvimento/html.appc.html",
   "name": "Guia APPCC 22 páginas — desenvolvimento",
-  "short_name": "Guia APPCC",
+  "short_name": "APPCC Teste",
   "description": "Guia experimental de avaliação do risco de envasadoras de água mineral natural e água natural.",
   "lang": "pt-BR",
   "start_url": "./html.appc.html",
@@ -22,5 +22,6 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }

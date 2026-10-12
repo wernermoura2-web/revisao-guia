@@ -18,3 +18,7 @@ Na impressão, as observações preenchem primeiro a coluna esquerda de cima par
 O menu Documentos de apoio permite cadastrar novos documentos, escolher um ou vários itens/frases, permitir ou retirar Não aplicável e editar/restaurar a orientação original. Os vínculos e cadastros acompanham o JSON. Avaliações anteriores continuam guardadas ao mover um documento.
 
 Trabalho em equipe adapta o fluxo do guia de 18 páginas: Gerar arquivo inicial da equipe, Abrir preenchimento, Salvar arquivo e Importar processos. A importação é seletiva por processo, aceita vários arquivos para conferência separada, exige autorização para substituir dados existentes e registra os processos já incorporados. Preserva identificação, anexos e registros gerais do responsável. Códigos de inspeção diferentes são bloqueados; configurações divergentes exigem escolha explícita. O formato de indicadores revisado exige os JSONs deste guia APPCC.
+
+A revisão 2026.10.12.6 fixa as folhas impressas na área A4 para evitar páginas vazias. Processos 7/8 e observações gerais/continuação usam uma coluna; considerações finais usam duas. Medidas e os dois campos separados (fiscalização/envasadora) usam uma coluna. O texto antigo dos participantes é preservado para distribuição manual.
+
+A instalação tem identidade própria APPCC Teste, abertura no Chrome no Android e confirmação pelo instalador do navegador. O cache do aplicativo é preparado separadamente do PDF para que uma falha ao baixar o PDF não impeça a instalação do guia.
