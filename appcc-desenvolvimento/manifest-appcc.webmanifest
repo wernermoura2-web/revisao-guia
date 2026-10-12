@@ -23,5 +23,17 @@
       "purpose": "any"
     }
   ],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/manifest-appcc.webmanifest",
+      "id": "https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/appcc-revisao-22"
+    },
+    {
+      "platform": "webapp",
+      "url": "https://wernermoura2-web.github.io/revisao-guia/manifest.webmanifest",
+      "id": "https://wernermoura2-web.github.io/revisao-guia/"
+    }
+  ]
 }
