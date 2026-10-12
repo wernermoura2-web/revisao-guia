@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "Guia APPCC 22 páginas — desenvolvimento",
+  "short_name": "Guia APPCC",
+  "description": "Guia experimental de avaliação do risco de envasadoras de água mineral natural e água natural.",
+  "lang": "pt-BR",
+  "start_url": "./html.appc.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#edf3f7",
+  "theme_color": "#075a9c",
+  "icons": [
+    {
+      "src": "./icon-appcc-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-appcc-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
