@@ -1,67 +1,73 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075a9c"><link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=9">
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075a9c"><link rel="manifest" type="application/manifest+json" href="./manifest-appcc.webmanifest?v=10">
 <script id="appcc-install">window.AppccPWA=(()=>{
  'use strict';
  const root='https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/';
- const installURL=root+'html.appcc.cel.html?v=9';
- let promptEvent=null,busy=false,requested=false,completed=false,initialized=false,offline=false;
+ const menuURL=root+'html.appc.html?v=10';
+ const requestedURL=menuURL+'&install=1';
+ let promptEvent=null,busy=false,completed=false,requested=false,offline=false,waiting=new URL(location.href||menuURL).searchParams.get('install')==='1';
  const standalone=()=>!!(window.matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true);
  const android=()=>/Android/i.test(navigator.userAgent||'');
+ const embedded=()=>/; wv\)|\bwv\b|FBAN|FBAV|Instagram|ChatGPT/i.test(navigator.userAgent||'');
  const ios=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent||'')||navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1;
- function chromeURL(){const url=new URL(installURL);return 'intent://'+url.host+url.pathname+url.search+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url.href)+';end';}
+ function chromeURL(){const u=new URL(requestedURL);return 'intent://'+u.host+u.pathname+u.search+'#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;S.browser_fallback_url='+encodeURIComponent(u.href)+';end';}
  function message(text){document.querySelectorAll('[data-pwa-status]').forEach(el=>el.textContent=text);}
  function refresh(){
-  document.querySelectorAll('[data-pwa-install]').forEach(el=>{el.hidden=standalone()||completed;el.disabled=busy;el.textContent=busy?'Abrindo instalador…':'Instalar no celular';});
+  document.querySelectorAll('[data-pwa-install]').forEach(el=>{
+   const label=el.querySelector?.('[data-pwa-install-label]')||el;
+   label.textContent=completed?'Instalação solicitada':busy?'Abrindo instalador…':'Instalar no celular';
+   el.hidden=false;el.disabled=busy||completed;
+  });
   document.querySelectorAll('[data-pwa-chrome]').forEach(el=>{el.href=chromeURL();el.hidden=!android();});
-  document.querySelectorAll('[data-pwa-link]').forEach(el=>el.href=installURL);
+  document.querySelectorAll('[data-pwa-link]').forEach(el=>el.href=requestedURL);
   document.querySelectorAll('[data-pwa-ios]').forEach(el=>el.hidden=!ios());
   const status=document.getElementById('offlineStatus');if(status&&offline)status.textContent='Acesso offline disponível';
  }
- function showHelp(){
-  refresh();const dialog=document.getElementById('installDialog'),help=document.getElementById('installHelp');
-  if(dialog&&!dialog.open){if(dialog.showModal)dialog.showModal();else dialog.setAttribute('open','');}
-  if(help){help.hidden=false;help.scrollIntoView?.({behavior:'smooth',block:'start'});}
-  message(location.protocol==='file:'?'Abra a versão online para instalar o APPCC Teste.':ios()?'No Safari, toque em Compartilhar e Adicionar à Tela de Início.':'No Chrome, abra o menu ⋮ e escolha Instalar aplicativo ou Adicionar à tela inicial → Instalar.');
- }
  async function install(){
-  if(busy||standalone()||completed)return;
+  if(busy||completed)return;
   if(promptEvent){
-   const event=promptEvent;promptEvent=null;busy=true;
+   const event=promptEvent;promptEvent=null;busy=true;waiting=false;
    try{
-    // Invoke the browser synchronously within this button's user gesture.
     const opening=event.prompt();refresh();
     const result=await opening,choice=event.userChoice?await event.userChoice:result;
     requested=choice?.outcome==='accepted';
-    message(requested?'Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste na lista de aplicativos.':'Instalação cancelada.');
-   }catch(error){requested=false;showHelp();}
+    message(requested?'Instalação solicitada. Aguarde o navegador concluir e procure APPCC Teste na lista de aplicativos.':'Instalação cancelada.');
+   }catch(error){message('O instalador não abriu. Toque em Instalar no celular quando o navegador disponibilizar a instalação.');}
    finally{busy=false;refresh();}
    return;
   }
-  showHelp();
- }
- function offlineReady(){offline=true;refresh();if(!requested&&!promptEvent)message('Guia disponível offline. Use Instalar no celular para adicionar o aplicativo.');}
- function init(){
-  refresh();if(standalone())message('APPCC Teste aberto pelo ícone do aplicativo.');
-  else if(promptEvent)message('Pronto para instalar. Toque em Instalar no celular.');
-  else if(location.protocol==='file:')message('Abra a versão online para instalar.');
-  else if(offline)message('Guia disponível offline. Toque em Instalar no celular.');
- }
- // Capture the native installer before the guide's data and rendering code runs.
- window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();promptEvent=event;requested=false;completed=false;refresh();message('Pronto para instalar. Toque em Instalar no celular.');});
- window.addEventListener('appinstalled',()=>{promptEvent=null;requested=true;completed=true;refresh();message('Instalação solicitada. Aguarde o navegador concluir e abra APPCC Teste.');});
- window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',init);
- function start(){
-  if(initialized)return;initialized=true;
-  if(location.protocol==='https:'&&'serviceWorker' in navigator){
-   navigator.serviceWorker.register(new URL('./sw-appcc.js',document.baseURI),{scope:'./',updateViaCache:'none'}).then(reg=>{
-    if(reg.active)offlineReady();const worker=reg.installing||reg.waiting;
-    worker?.addEventListener('statechange',()=>{if(worker.state==='activated')offlineReady();});
-    reg.update?.().catch(()=>{});
-   }).catch(()=>{message('Mantenha a conexão para preparar a instalação.');});
-   navigator.serviceWorker.addEventListener?.('controllerchange',offlineReady);
+  waiting=true;
+  if(android()&&(standalone()||embedded())){
+   // A parent PWA may cover this folder. Open Chrome at the SAME menu, not an installer page.
+   location.href=chromeURL();return;
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  if(location.protocol==='file:'){location.href=requestedURL;return;}
+  if(ios()){message('No Safari, use Compartilhar → Adicionar à Tela de Início.');return;}
+  message('Aguardando o instalador do navegador. Assim que estiver disponível, toque novamente em Instalar no celular.');
  }
- start();return {init,install,chromeURL,isStandalone:standalone};
+ function init(){
+  refresh();if(completed||requested)message('Instalação solicitada. Aguarde o navegador concluir e procure APPCC Teste.');
+  else if(promptEvent)message('Instalador disponível. Toque em Instalar no celular.');
+  else if(waiting)message('Preparando o instalador do APPCC Teste neste menu.');
+  else if(offline)message('Guia disponível offline. Use Instalar no celular para adicionar o APPCC Teste.');
+ }
+ function offlineReady(){offline=true;init();}
+ window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();promptEvent=event;requested=false;refresh();message('Instalador disponível. Toque em Instalar no celular.');
+  // Continue a requested installation only while the browser still reports an active gesture.
+  if(waiting&&navigator.userActivation?.isActive)void install();
+ });
+ window.addEventListener('appinstalled',()=>{promptEvent=null;completed=true;waiting=false;refresh();message('Instalação solicitada. Aguarde o navegador concluir e procure APPCC Teste.');});
+ window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change',init);
+ if(location.protocol==='https:'&&'serviceWorker' in navigator){
+  navigator.serviceWorker.register(new URL('./sw-appcc.js',document.baseURI),{scope:'./',updateViaCache:'none'}).then(reg=>{
+   if(reg.active)offlineReady();const worker=reg.installing||reg.waiting;
+   worker?.addEventListener('statechange',()=>{if(worker.state==='activated')offlineReady();});
+   reg.update?.().catch(()=>{});
+  }).catch(()=>message('Mantenha a internet para preparar a instalação.'));
+  navigator.serviceWorker.addEventListener?.('controllerchange',offlineReady);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+ return {init,install,chromeURL,isStandalone:standalone};
 })();</script><link rel="apple-touch-icon" href="./icon-appcc-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Guia APPCC"><title>Guia APPCC — PDF</title><style>*{box-sizing:border-box}body{margin:0;font:16px/1.5 Arial,sans-serif;background:#edf3f7;color:#193244}header{background:#075a9c;color:white;padding:24px 20px}header>div,main{max-width:780px;margin:auto}header h1{font-size:22px;line-height:1.3;margin:0 0 7px}header p{font-size:13px;margin:0;opacity:.95}.tag{display:inline-block;border:1px solid #ffffff66;padding:2px 8px;font-size:11px;border-radius:4px;margin-top:10px}main{padding:28px 18px}h2{font-size:24px;margin:0 0 12px}p{margin:12px 0}.muted{color:#61798a;font-size:14px}.options{display:grid;gap:15px;margin:24px 0}.option{display:grid;grid-template-columns:42px 1fr 22px;gap:14px;align-items:center;min-height:112px;width:100%;padding:20px;border:1px solid #c3d7e5;border-radius:10px;background:white;color:#193244;text-decoration:none;box-shadow:0 3px 10px #14395108}.option strong{display:block;font-size:19px;color:#075a9c}.option small{display:block;font-size:14px;line-height:1.5;color:#61798a;margin-top:5px}.number{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#e3eef6;color:#075a9c;font-size:18px;font-weight:bold}.button,button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:12px 17px;border:0;border-radius:7px;background:#075a9c;color:white;font:700 15px Arial;cursor:pointer;text-decoration:none}.secondary{background:white;border:1px solid #b2cadb;color:#075a9c}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}a:focus-visible,button:focus-visible{outline:3px solid #e1a417;outline-offset:3px}.notice{font-size:13px;color:#6b5525;background:#fff7df;border:1px solid #e4d296;border-left:4px solid #c99829;padding:12px;border-radius:5px}.card{background:white;border:1px solid #c9d9e4;border-radius:10px;padding:20px}.status{font-size:13px;color:#526b7c}li{margin:12px 0}iframe{width:100%;height:75vh;border:1px solid #c9d9e4;border-radius:8px;background:white}footer{max-width:780px;margin:auto;padding:10px 18px 28px;color:#718795;font-size:12px}@media(max-width:650px){header{padding:18px 14px}header h1{font-size:19px}main{padding:24px 12px}h2{font-size:21px}.option{padding:16px;gap:9px;grid-template-columns:38px 1fr 18px}.option strong{font-size:17px}.option small{font-size:13px}.pdf-preview{display:none}}@media(display-mode:standalone){.install-intro{display:none}}</style><style>[hidden]{display:none!important}</style></head><body><header><div><h1>Guia APPCC de 22 páginas</h1><p>Envasadoras de água mineral natural e água natural · Rio de Janeiro</p><span class="tag">TESTE E DESENVOLVIMENTO · REVISÃO LEGISLATIVA</span></div></header><main><h2>Guia APPCC em PDF</h2><p class="muted">Modelo de teste e desenvolvimento: 22 páginas, 82 indicadores e referências da revisão legislativa.</p><div class="buttons"><a class="button" href="./Guia_APPCC_22_Paginas.pdf" target="_blank" rel="noopener">Abrir PDF do guia</a><a class="button secondary" href="./Guia_APPCC_22_Paginas.pdf" download>Baixar PDF</a><a class="button secondary" href="./html.appc.html">← Menu do guia</a></div><p class="notice">Para gerar o PDF com o preenchimento, os cálculos e as fotos, abra o guia HTML e use “Imprimir / PDF”.</p><iframe class="pdf-preview" title="Modelo PDF do guia APPCC" src="./Guia_APPCC_22_Paginas.pdf"></iframe></main><footer>Versão experimental. Revise as referências quando a Anvisa publicar o ato normativo definitivo. Guarde uma cópia do preenchimento em JSON.</footer><script>
 
 function installApp(){return window.AppccPWA.install();}
