@@ -22,3 +22,5 @@ Trabalho em equipe adapta o fluxo do guia de 18 páginas: Gerar arquivo inicial 
 A revisão 2026.10.12.6 fixa as folhas impressas na área A4 para evitar páginas vazias. Processos 7/8 e observações gerais/continuação usam uma coluna; considerações finais usam duas. Medidas e os dois campos separados (fiscalização/envasadora) usam uma coluna. O texto antigo dos participantes é preservado para distribuição manual.
 
 A instalação tem identidade própria APPCC Teste, abertura no Chrome no Android e confirmação pelo instalador do navegador. O cache do aplicativo é preparado separadamente do PDF para que uma falha ao baixar o PDF não impeça a instalação do guia.
+
+A revisão 2026.10.12.7 ajusta as linhas de observação do Controle de Qualidade para manter todas as descrições no modelo de 22 páginas quando medido na largura real A4. Observações extensas continuam sendo preservadas nas páginas de continuação.
