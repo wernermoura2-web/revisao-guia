@@ -1,5 +1,5 @@
-const CACHE='guia-appcc-desenvolvimento-github-v16';
-const CORE=["./html.appc.html?v=16", "./html.appcc.int.html?v=16", "./html.appcc.pdf.html?v=16", "./html.appcc.cel.html?v=16", "./appcc-calculos.js?v=16", "./appcc-pdf-editor.js?v=16", "./pdf-appcc-campos.json?v=16", "./pdfjs-appcc.mjs?v=16", "./pdfjs-appcc.worker.mjs?v=16", "./pdf-lib-appcc.min.js?v=16", "./Guia_APPCC_22_Paginas.pdf?v=16", "./manifest-appcc.webmanifest?v=16", "./icon-appcc-pcc-192.png?v=16", "./icon-appcc-pcc-512.png?v=16"];
+const CACHE='guia-appcc-desenvolvimento-github-v17';
+const CORE=["./appcc.html?v=17", "./html.appc.html?v=17", "./html.appcc.int.html?v=17", "./html.appcc.pdf.html?v=17", "./html.appcc.cel.html?v=17", "./appcc-calculos.js?v=17", "./appcc-pdf-editor.js?v=17", "./pdf-appcc-campos.json?v=17", "./pdfjs-appcc.mjs?v=17", "./pdfjs-appcc.worker.mjs?v=17", "./pdf-lib-appcc.min.js?v=17", "./Guia_APPCC_22_Paginas.pdf?v=17", "./manifest-appcc-instalacao.webmanifest?v=17", "./icon-appcc-pcc-192.png?v=17", "./icon-appcc-pcc-512.png?v=17"];
 const PATHS=new Set(CORE.map(x=>new URL(x,self.location.href).pathname));
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE.map(x=>new Request(x,{cache:'reload'})))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('guia-appcc-desenvolvimento-github-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

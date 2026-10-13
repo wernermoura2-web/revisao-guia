@@ -1,0 +1,34 @@
+{
+  "id": "/revisao-guia/appcc-desenvolvimento/guia-appcc-22",
+  "name": "Guia APPCC — 22 páginas",
+  "short_name": "Guia APPCC",
+  "description": "Revisão do guia estadual de avaliação do risco de envasadoras. Preenchimento local e acesso offline.",
+  "lang": "pt-BR",
+  "start_url": "/revisao-guia/appcc-desenvolvimento/appcc.html",
+  "scope": "/revisao-guia/appcc-desenvolvimento/",
+  "display": "standalone",
+  "background_color": "#edf3f7",
+  "theme_color": "#075a9c",
+  "icons": [
+    {
+      "src": "/revisao-guia/appcc-desenvolvimento/icon-appcc-pcc-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/revisao-guia/appcc-desenvolvimento/icon-appcc-pcc-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/manifest-appcc-instalacao.webmanifest",
+      "id": "https://wernermoura2-web.github.io/revisao-guia/appcc-desenvolvimento/guia-appcc-22"
+    }
+  ]
+}
