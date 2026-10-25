@@ -126,9 +126,10 @@ for page in range(13):
     a,b=xs[4+col],xs[5+col];cell(pg,(a,y,b,y+rowheight))
     pair=next(((k,c) for k,c in entries.items() if c['code']==str(code) and c['col']==col),None)
     if not pair:text(pg,(a,y,b,y+rowheight),'NÃO APLICÁVEL',5.6,False,1);continue
-    key,c=pair;choices=['S','N']+(['A'] if c['allowNA'] else [])+['F'];cw=(b-a)/len(choices)
+    key,c=pair;choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if len(c['frases'])>1 else []);cw=(b-a)/len(choices)
     for j,ch in enumerate(choices):
-     r=(a+j*cw,y,b if j==len(choices)-1 else a+(j+1)*cw,y+rowheight)
+     bt=y+(rowheight-11.5)/2
+     r=(a+j*cw,bt,b if j==len(choices)-1 else a+(j+1)*cw,bt+11.5)
      label={'S':'Sim','N':'Não','A':'NA','F':'F'}[ch]
      widget(pg,f'b_{key}_{ch}',inset(r),label=label,button=True,script=f'abrirFrases.call(this,{json.dumps(key)});' if ch=='F' else f'marcarItem.call(this,{json.dumps(key)},{json.dumps(ch)});')
   else:
@@ -139,7 +140,7 @@ for page in range(13):
    choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if len(c['frases'])>1 else [])
    button_top=y+rowheight/2-13;cw=71/len(choices)
    for j,ch in enumerate(choices):
-    rect=(510+j*cw+.7,button_top,510+(j+1)*cw-.7,button_top+12)
+    rect=(510+j*cw+.7,button_top,510+(j+1)*cw-.7,button_top+11.5)
     widget(pg,f'b_{key}_{ch}',rect,label={'S':'Sim','N':'Não','A':'NA','F':'F'}[ch],button=True,script=f'abrirFrases.call(this,{json.dumps(key)});' if ch=='F' else f'marcarItem.call(this,{json.dumps(key)},{json.dumps(ch)});',font=5.4 if len(choices)==4 else 6.6)
   cell(pg,(510,y,581,y+rowheight))
   result_top=y+rowheight/2+2 if page>=11 else y+1
@@ -216,7 +217,14 @@ for pg in writer.pages:
  for obj in pg.get('/Annots',[]):
   obj=obj.get_object();n=str(obj.get('/T',''))
   if n.startswith(('ans_q_','cat_q_','note_q_')):obj[NameObject('/F')]=NumberObject(2)
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from indicator_templates import make_editor,attach_editor
+editor_pdf=BUILD/'phrase-editor.pdf'
+make_editor(editor_pdf)
+attach_editor(writer,editor_pdf,CFG)
 js=(ROOT/'tools/indicator_pdf.js').read_text().replace('__CFG__',json.dumps(CFG,ensure_ascii=True,separators=(',',':')))
+js+='\n'+(ROOT/'tools/indicator_editor.js').read_text()
 writer.add_js(js)
 out=ROOT/'Guia_APPCC_BPF.pdf'
 with out.open('wb') as f:writer.write(f)
@@ -253,3 +261,6 @@ assert len(check.pages)==22
 assert all(fields[f'cat_{k}_{j}'].get('/V')==f['cat'] for k,c in CFG['itens'].items() for j,f in enumerate(c['frases']))
 assert all(not fields[n].get('/V') for n in expected if n.startswith('ans_'))
 print(f'Built {out.name}: {len(check.pages)} pages, {len(fields)} canonical fields')
+
+shutil.copyfile(ROOT/'paper-data-layout-v5.js',ROOT/'paper-data-layout-v6.js')
+shutil.copyfile(out,ROOT/'Guia_APPCC_BPF_Layout_v6.pdf')
