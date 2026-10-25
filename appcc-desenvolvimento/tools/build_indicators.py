@@ -81,6 +81,10 @@ for page in range(13):
   from quality_page import render_quality_page
   render_quality_page(pg,CFG,text,cell,widget,inset)
   continue
+ if page==12:
+  from responsibility_page import render_responsibility_page
+  render_responsibility_page(pg,CFG,text,cell,widget,inset)
+  continue
  entries={k:c for k,c in CFG['itens'].items() if c['page']==page}
  codes=sorted({int(c['code']) for c in entries.values()},key=lambda c:ORDER.get(page,[]).index(c) if page in ORDER else c)
  columns=sorted({c['col'] for c in entries.values()})

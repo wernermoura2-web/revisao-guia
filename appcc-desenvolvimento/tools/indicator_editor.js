@@ -7,7 +7,7 @@ function ieStore(){indSet.call(this,'editor_ativo',JSON.stringify(IND_EDITOR));}
 function ieShow(){
  if(!ieRecover.call(this)||IND_EDITOR_BUSY)return;IND_EDITOR_BUSY=true;
  try{var c=IND_CFG.itens[IND_EDITOR.key],start=IND_EDITOR.offset;
-  iePut.call(this,'title','Indicador '+c.code+(c.cqId?' - '+c.cqId+' - '+c.title:'')+' - '+ieUnit(c));
+  iePut.call(this,'title','Indicador '+c.code+((c.cqId||c.rmId)?' - '+(c.cqId||c.rmId)+' - '+c.title:'')+' - '+ieUnit(c));
   var previous=ieField.call(this,'prev'),next=ieField.call(this,'next');if(previous)previous.display=start>0?display.visible:display.hidden;if(next)next.display=start+3<c.frases.length?display.visible:display.hidden;
   iePut.call(this,'range','Frases '+(start+1)+' a '+Math.min(start+3,c.frases.length)+' de '+c.frases.length+' | Use Guardar alterações ou Salvar e voltar ao processo.');
   for(var slot=0;slot<3;slot++){
@@ -38,7 +38,7 @@ function ieMove(delta){if(!ieRecover.call(this))return;ieSave.call(this);var cou
 function ieDeleteClosed(){if(!IND_EDITOR_CLOSE)return;var q=IND_EDITOR_CLOSE;IND_EDITOR_CLOSE=null;try{q.doc.deletePages(q.page,q.page);}catch(e){app.alert('As respostas foram salvas. O leitor manteve a página auxiliar aberta.');}}
 function ieClose(){if(!ieRecover.call(this))return;ieSave.call(this);var e=IND_EDITOR;IND_EDITOR=null;indSet.call(this,'editor_ativo','');this.pageNum=e.returnPage;IND_EDITOR_CLOSE={doc:this,page:e.page};app.setTimeOut('ieDeleteClosed();',200);}
 function abrirFrases(k){
- var c=IND_CFG.itens[k];if(!c||(c.frases.length<2&&!c.cqId))return;
+ var c=IND_CFG.itens[k];if(!c||(c.frases.length<2&&!c.cqId&&!c.rmId))return;
  if(ieRecover.call(this)){if(IND_EDITOR.key===k){this.pageNum=IND_EDITOR.page;ieShow.call(this);return;}app.alert('Salve e volte ao processo antes de abrir outro indicador.');return;}
  try{var f=this.getField(c.classField),page=f&&typeof f.page==='number'?f.page:c.page;var template=this.getTemplate('APPCC_Indicador_Frases');if(!template)throw Error('Página de frases indisponível.');template.spawn(page+1,false,false);IND_EDITOR={key:k,page:page+1,returnPage:page,offset:0};ieStore.call(this);ieShow.call(this);this.pageNum=page+1;}catch(e){IND_EDITOR=null;app.alert('Abra o PDF no Adobe Acrobat para usar a página de frases. '+e);}
 }
