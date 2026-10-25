@@ -16,7 +16,7 @@ function indCalc(){
   for(var b=0;b<4;b++){var choice=['S','N','A','F'][b],f=this.getField('b_'+k+'_'+choice);if(f){if(choice==='F')f.buttonSetCaption('F');else f.value=a===({S:'Sim',N:'Não',A:'N/A'})[choice]?'Yes':'Off';}}
   if(c.page>=11){indSet.call(this,'obs_p'+(c.page+1)+'_'+c.code,notes.join('\n\n'));}
  }
- for(var sk in summaries){var sp=sk.split('_'),prefix='p'+(Number(sp[0])+1)+'_'+sp[1],sum=summaries[sk],cat=sum.cat.join('/'),nc=sum.nc.join('/');indSet.call(this,'classe_'+prefix,cat.length<11?cat:'Ver F');indSet.call(this,'criticidade_classe_'+prefix,nc.length<7?nc:'Ver F');indSet.call(this,'prob_classe_'+prefix,sum.p.join('/'));indSet.call(this,'pontuacao_'+prefix,sum.ref.join('/'));}
+ for(var sk in summaries){var sp=sk.split('_'),prefix='p'+(Number(sp[0])+1)+'_'+sp[1],sum=summaries[sk],cat=sum.cat.join('/'),nc=sum.nc.join('/');indSet.call(this,'classe_'+prefix,cat.length<11?cat:'Ver F');indSet.call(this,'criticidade_classe_'+prefix,nc.length<7?nc:'Ver F');indSet.call(this,'prob_classe_'+prefix,sum.p.join('/')+(Object.keys(IND_CFG.itens).some(function(k){var c=IND_CFG.itens[k];return c.page==sp[0]&&c.code==sp[1]&&c.frases.some(function(f){return f.probabilityProvisional;});})?'*':''));indSet.call(this,'pontuacao_'+prefix,sum.ref.join('/'));}
  for(var pk in codes){var arr=codes[pk],v=arr.indexOf('Pendente')>=0?'Pendente':arr.indexOf('Não')>=0?'Não':arr.every(function(x){return x==='N/A';})?'N/A':'Sim';var sp=pk.split('_');indSet.call(this,'res_p'+(Number(sp[0])+1)+'_'+sp[1],v);}
  for(var pg in page){var n=Number(pg)+1,z=indSum(page[pg]);indSet.call(this,'pct_resultado_p'+n,z.v===null?'':z.v.toFixed(2)+'%');indSet.call(this,'risco_resultado_p'+n,indRisk(z.v));
   for(var col=1;col<=4;col++){var selected=[];for(var key in all)if(IND_CFG.itens[key].page==pg&&IND_CFG.itens[key].col===col)selected.push(all[key]);var u=indSum(selected);indSet.call(this,'pct_p'+n+'c'+col,u.v===null?'':u.v.toFixed(2)+'%');indSet.call(this,'risk_p'+n+'c'+col,indRisk(u.v));}
@@ -26,7 +26,7 @@ function indCalc(){
  var level=complete?Math.max.apply(Math,levels):0;indSet.call(this,'risco_estabelecimento',level?'GRUPO '+level+' - '+['','BAIXO','MÉDIO','ALTO'][level]:'Pendente');
  for(var g=1;g<=3;g++)indSet.call(this,'classificacao_grupo_'+g,(level===g?'(X) ':'( ) ')+'Grupo '+g+' - Estabelecimento de '+['','Baixo','Médio','Alto'][g]+' Risco');
 }
-function marcarItem(k,a){var c=IND_CFG.itens[k];if(!c||a==='A'&&!c.allowNA)return;if(c.frases.length>1){abrirFrases.call(this,k);return;}indSet.call(this,'ans_'+k+'_0',a);indCalc.call(this);}
+function marcarItem(k,a){var c=IND_CFG.itens[k];if(!c||a==='A'&&!(c.frases[0].allowNA===undefined?c.allowNA:c.frases[0].allowNA))return;if(c.frases.length>1){abrirFrases.call(this,k);return;}indSet.call(this,'ans_'+k+'_0',a);indCalc.call(this);}
 function limparPagina(page){if(app.alert('Limpar as respostas desta página?',2,2)!==4)return;for(var k in IND_CFG.itens)if(IND_CFG.itens[k].page===page)for(var j=0;j<IND_CFG.itens[k].frases.length;j++){indSet.call(this,'ans_'+k+'_'+j,'');indSet.call(this,'note_'+k+'_'+j,'');}indCalc.call(this);}
 function anexarFoto(n){var f=this.getField(n);if(f)f.buttonImportIcon();}
 function girarFoto(n){var f=this.getField(n);if(f)f.rotation=((f.rotation||0)+90)%360;}

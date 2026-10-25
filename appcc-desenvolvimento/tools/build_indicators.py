@@ -75,6 +75,12 @@ for page in range(13):
  if page==0:
   pg.add_redact_annot(fitz.Rect(14,165,581,181),fill=BLUE);pg.apply_redactions(images=0,graphics=1)
   text(pg,(14,165,581,181),'INDICADORES - REVISÃO LEGISLATIVA / APPCC BPF',8,True,1)
+ if page==11:
+  import sys
+  sys.path.insert(0,str(Path(__file__).resolve().parent))
+  from quality_page import render_quality_page
+  render_quality_page(pg,CFG,text,cell,widget,inset)
+  continue
  entries={k:c for k,c in CFG['itens'].items() if c['page']==page}
  codes=sorted({int(c['code']) for c in entries.values()},key=lambda c:ORDER.get(page,[]).index(c) if page in ORDER else c)
  columns=sorted({c['col'] for c in entries.values()})
