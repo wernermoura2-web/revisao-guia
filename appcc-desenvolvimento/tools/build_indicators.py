@@ -3,13 +3,14 @@
 Run from the site root. Source PDF is retained in .build; generated PDF, page
 backgrounds and browser form geometry are emitted together from one model.
 """
-import json, math, re, shutil, urllib.request
+import json, math, re, shutil, urllib.request, sys
 from pathlib import Path
 import fitz
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import NameObject, DictionaryObject, ArrayObject, NumberObject
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(Path(__file__).resolve().parent))
 CFG=json.loads((ROOT/'config.js').read_text().split('=',1)[1].rstrip().rstrip(';'))
 BUILD=ROOT/'.build';BUILD.mkdir(exist_ok=True)
 SOURCE=BUILD/'source.pdf'
@@ -88,6 +89,10 @@ for page in range(13):
  if page==12:
   from responsibility_page import render_responsibility_page
   render_responsibility_page(pg,CFG,text,cell,widget,inset)
+  continue
+ if 2<=page<=5:
+  from reservoir_page import render_reservoir_page
+  render_reservoir_page(pg,CFG,text,cell,widget,inset)
   continue
  entries={k:c for k,c in CFG['itens'].items() if c['page']==page}
  codes=sorted({int(c['code']) for c in entries.values()},key=lambda c:ORDER.get(page,[]).index(c) if page in ORDER else c)

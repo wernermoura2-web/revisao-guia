@@ -119,6 +119,19 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeReservoirReview(state);
+ if(state.reservoirReviewVersion===CFG.reservoirReviewVersion)return state;
+ state.a=state.a||{};state.legacyReservoirReview=state.legacyReservoirReview||{};
+ for(let page=3;page<=6;page++)for(let col=1;col<=4;col++)for(const code of [14,16]){
+  const key='q_p'+page+'c'+col+'_'+code,previous=state.a[key];if(!previous)continue;
+  state.legacyReservoirReview[key]=JSON.parse(JSON.stringify(previous));
+  // Split filter evidence and broadened hygiene records require fresh review.
+  delete previous[3];
+ }
+ if(state.fields){const next={};for(const [name,value] of Object.entries(state.fields))next[CFG.reservoirFieldMigration[name]||name]=value;state.fields=next;}
+ state.reservoirReviewVersion=CFG.reservoirReviewVersion;return state;
+}
+function migrateBeforeReservoirReview(state){
  state=migrateBeforeConductionReview(state);
  if(state.conductionReviewVersion===CFG.conductionReviewVersion)return state;
  state.a=state.a||{};state.legacyConductionReview=state.legacyConductionReview||{};
