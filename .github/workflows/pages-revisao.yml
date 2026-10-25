@@ -34,6 +34,8 @@ jobs:
           node --check appcc-desenvolvimento/tools/indicator_pdf.js
           node appcc-desenvolvimento/tools/test_indicator_editor.cjs
           node appcc-desenvolvimento/tools/test_responsibility.cjs
+          node appcc-desenvolvimento/tools/test_capture_supplement.cjs
+          node appcc-desenvolvimento/tools/test_numbering.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'

@@ -21,7 +21,7 @@ doc=fitz.open(SOURCE)
 BLUE=(.86,.91,.94); PALE=(.94,.96,.97); LINE=(.35,.42,.46)
 PAGE_NAMES=['Captação','Condução das captações','Reservatórios - Captação 1','Reservatórios - Captação 2','Reservatórios - Captação 3','Reservatórios - Captação 4','Recepção de embalagens e insumos','Higienização de retornáveis e tampas','Higienização de descartáveis e tampas','Envase de retornáveis','Envase de descartáveis','Controle de qualidade','Responsabilidade e manipuladores']
 names={0:['CAPTAÇÃO 1','CAPTAÇÃO 2','CAPTAÇÃO 3','CAPTAÇÃO 4'],1:['CONDUÇÃO 1','CONDUÇÃO 2','CONDUÇÃO 3','CONDUÇÃO 4'],6:['RETORNÁVEIS','DESCARTÁVEIS','RÓTULOS','SANEANTES'],7:['LINHA 1','LINHA 2','LINHA 3','TAMPAS'],8:['LINHA 1','LINHA 2','LINHA 3','TAMPAS'],9:['LINHA 1','LINHA 2','LINHA 3','LINHA 4'],10:['LINHA 1','LINHA 2','LINHA 3','LINHA 4']}
-ORDER={6:[18,22,19,20,21],7:[30,31,32,33,34,40,35,36,37,38,39],8:[43,44,45,51,46,47,48,49,50]}
+ORDER={int(p):codes for p,codes in CFG['pageIndicatorOrder'].items()}
 FONTS={'helv':fitz.Font('helv'),'hebo':fitz.Font('hebo')}
 def clean(text):
  return str(text).replace('–','-').replace('—','-').replace('’',"'").replace('‘',"'").replace('“','"').replace('”','"').replace('Σ','Soma').replace('≥','>=').replace('≤','<=')

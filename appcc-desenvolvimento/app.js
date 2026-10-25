@@ -119,6 +119,15 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeSequentialNumbering(state);
+ if(state.numberingVersion===CFG.numberingVersion)return state;
+ if(state.fields){
+  const next={};for(const [name,value] of Object.entries(state.fields))next[CFG.numberingFieldMigration[name]||name]=value;
+  state.fields=next;
+ }
+ state.numberingVersion=CFG.numberingVersion;return state;
+}
+function migrateBeforeSequentialNumbering(state){
  state=migrateBeforeResponsibilityReview(state);
  if(state.responsibilityReviewVersion===CFG.responsibilityVersion)return state;
  state.a=state.a||{};
