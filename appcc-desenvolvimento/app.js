@@ -119,6 +119,18 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeConductionReview(state);
+ if(state.conductionReviewVersion===CFG.conductionReviewVersion)return state;
+ state.a=state.a||{};state.legacyConductionReview=state.legacyConductionReview||{};
+ for(let col=1;col<=4;col++){
+  const key='q_p2c'+col+'_10',previous=state.a[key];if(!previous)continue;
+  state.legacyConductionReview[key]=JSON.parse(JSON.stringify(previous));
+  // The broader records requirement must be reviewed; do not infer its answer.
+  delete previous[2];
+ }
+ state.conductionReviewVersion=CFG.conductionReviewVersion;return state;
+}
+function migrateBeforeConductionReview(state){
  state=migrateBeforeCaptureMerge(state);
  if(state.captureMergeVersion===CFG.captureMergeVersion)return state;
  state.a=state.a||{};state.legacyCaptureSupplement=state.legacyCaptureSupplement||{};

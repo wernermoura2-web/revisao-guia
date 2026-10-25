@@ -64,8 +64,12 @@ def phrases_for(entries):
    seen.add(sig);out.append((j+1,f))
  return out
 
+def phrase_description(f,j,page):
+ # Page 2 keeps complete requirement wording; references remain in F.
+ return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page!=1 else '')
+
 for page in range(13):
- pg=doc[page];pnum=page+1;top=183 if page==0 else 90
+ pg=doc[page];pnum=page+1;top=183 if page==0 else (88 if page==1 else 90)
  # Retain the original institutional header, identification, title and footer.
  for w in list(pg.widgets() or []):
   if w.rect.y1>top and w.rect.y0<795:pg.delete_widget(w)
@@ -89,12 +93,12 @@ for page in range(13):
  codes=sorted({int(c['code']) for c in entries.values()},key=lambda c:ORDER.get(page,[]).index(c) if page in ORDER else c)
  columns=sorted({c['col'] for c in entries.values()})
  def description_height(size):
-  return sum(max(16,sum(len(lines(f'F{j} - '+f['texto']+' ['+f['ref']+']',516,size))*size*1.13+2 for j,f in phrases_for([c for c in entries.values() if c['code']==str(code)]))) for code in codes)
+  return sum(max(16,sum(len(lines(phrase_description(f,j,page),516,size))*size*1.13+2 for j,f in phrases_for([c for c in entries.values() if c['code']==str(code)]))) for code in codes)
  xs=[14,60,98,126,155,174,258,342,426,510,581] if page<11 else [14,60,98,126,155,174,510,581]
  headers=['INDIC.','APPCC','NC','P','NC x P']
  if page<11:headers+=names.get(page,['RESERV. 1','RESERV. 2','RESERV. 3','RESERV. 4'])+['RESULTADO']
  else:headers+=['OBSERVAÇÕES (2 COLUNAS)','RESULTADO']
- hh=28 if page<11 else 22
+ hh=22 if page==1 else (28 if page<11 else 22)
  for a,b,label in zip(xs,xs[1:],headers):cell(pg,(a,top,b,top+hh),label,6.2,True,BLUE,1)
  y=top+hh
  if page in (0,1):
@@ -116,7 +120,7 @@ for page in range(13):
    for j,(left,right,label) in enumerate([(a,mid,'Poço'),(mid,b,'Surgência')]):
     widget(pg,f'fonte_{col}_{j}',inset((left,y,right,y+14)),label=label,button=True,script=f'selecionarFonte.call(this,{col},{json.dumps(label)});')
   cell(pg,(510,y,581,y+14));y+=14
- rowheight=15.3 if page<11 else (23 if page==11 else 37)
+ rowheight=(14 if page==1 else 15.3) if page<11 else (23 if page==11 else 37)
  if page in (11,12):
   rowheight=(788-y-56-description_height(7.25))/len(codes)
  for code in codes:
@@ -157,26 +161,28 @@ for page in range(13):
   result_bottom=result_top+14 if page>=11 else y+rowheight-1
   widget(pg,f'res_p{pnum}_{code}',(511,result_top,580,result_bottom),ro=True)
   y+=rowheight
+ result_h=12 if page==1 else 14
+ legend_h=10 if page==1 else 12
  for mode,label in [('pct','% ATENDIDO'),('risk','RISCO')]:
-  cell(pg,(14,y,174,y+14),label,7,True,BLUE,1)
+  cell(pg,(14,y,174,y+result_h),label,7,True,BLUE,1)
   if page<11:
    for col in columns:
-    a,b=xs[4+col],xs[5+col];cell(pg,(a,y,b,y+14));widget(pg,f'{mode}_p{pnum}c{col}',inset((a,y,b,y+14)),ro=True)
-  else:cell(pg,(174,y,510,y+14))
-  cell(pg,(510,y,581,y+14));widget(pg,f'{"pct_resultado" if mode=="pct" else "risco_resultado"}_p{pnum}',inset((510,y,581,y+14)),ro=True);y+=14
+    a,b=xs[4+col],xs[5+col];cell(pg,(a,y,b,y+result_h));widget(pg,f'{mode}_p{pnum}c{col}',inset((a,y,b,y+result_h)),ro=True)
+  else:cell(pg,(174,y,510,y+result_h))
+  cell(pg,(510,y,581,y+result_h));widget(pg,f'{"pct_resultado" if mode=="pct" else "risco_resultado"}_p{pnum}',inset((510,y,581,y+result_h)),ro=True);y+=result_h
  for label,ranges,colors in [('AVALIAÇÃO',['100%','76 - 99%','51 - 75%','0 - 50%'],[None]*4),('RISCO',['1 BAIXO','1 BAIXO','2 MÉDIO','3 ALTO'],[(.57,.82,.31),(.57,.82,.31),(1,1,0),(1,.14,.14)])]:
-  cell(pg,(14,y,126,y+12),label,6.5,True,None,1)
-  for i,(value,color) in enumerate(zip(ranges,colors)):a=126+i*(455/4);cell(pg,(a,y,a+455/4,y+12),value,6.4,True,color,1)
-  y+=12
- y+=4
+  cell(pg,(14,y,126,y+legend_h),label,6.5,True,None,1)
+  for i,(value,color) in enumerate(zip(ranges,colors)):a=126+i*(455/4);cell(pg,(a,y,a+455/4,y+legend_h),value,6.4,True,color,1)
+  y+=legend_h
+ y+=2 if page==1 else 4
  # Full legislative text, including the references. Font size is fitted once
  # per page. Never silently clip or omit a phrase to fit a fixed page count.
  available=788-y-(68 if page<11 else 0)
  size=7.25
  # Page 8 keeps the former response grid. Shrink ONLY the description text
  # and reserve twice the baseline editable height for the two note columns.
- if page==0:
-  note_top=788.3-CFG['captureObservationMinHeight']-.7
+ if page in (0,1):
+  note_top=788.3-CFG['captureObservationMinHeight' if page==0 else 'conductionObservationMinHeight']-.7
   available=note_top-19-y
   low,high=5.8,7.25
   for _ in range(45):
@@ -203,7 +209,7 @@ for page in range(13):
  description_bottoms=[]
  for code in codes:
   pf=phrases_for([c for c in entries.values() if c['code']==str(code)])
-  texts=[f'F{j} - '+f['texto']+' ['+f['ref']+']' for j,f in pf]
+  texts=[phrase_description(f,j,page) for j,f in pf]
   heights=[len(lines(t,516,size))*size*1.13+2 for t in texts];h=max(16,sum(heights))+extra_description_height
   cell(pg,(14,y,60,y+h),f'Indicador\n{code}',6.5,True,PALE,1);cell(pg,(60,y,581,y+h))
   dy=y+1
@@ -216,7 +222,7 @@ for page in range(13):
   description_bottoms.append(glyph_bottom)
   y+=h
  if page<11:
-  if page in (0,7):y=max(y,note_top-19)
+  if page in (0,1,7):y=max(y,note_top-19)
   y+=3;cell(pg,(14,y,581,y+14),'OBSERVAÇÕES GERAIS',7,True,PALE,1);y+=16
   if description_bottoms and max(description_bottoms)>y-16+.01:raise ValueError(f'Page {pnum}: notes overlap descriptions')
   for suffix,a,b in [('',14,294),('_col2',301,581)]:
