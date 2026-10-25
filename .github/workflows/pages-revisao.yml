@@ -36,6 +36,7 @@ jobs:
           node appcc-desenvolvimento/tools/test_responsibility.cjs
           node appcc-desenvolvimento/tools/test_capture_supplement.cjs
           node appcc-desenvolvimento/tools/test_numbering.cjs
+          node appcc-desenvolvimento/tools/test_capture_merge.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'

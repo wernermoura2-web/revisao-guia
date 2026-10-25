@@ -175,6 +175,15 @@ for page in range(13):
  size=7.25
  # Page 8 keeps the former response grid. Shrink ONLY the description text
  # and reserve twice the baseline editable height for the two note columns.
+ if page==0:
+  note_top=788.3-CFG['captureObservationMinHeight']-.7
+  available=note_top-19-y
+  low,high=5.8,7.25
+  for _ in range(45):
+   middle=(low+high)/2
+   if description_height(middle)<=available:low=middle
+   else:high=middle
+  size=math.floor(low*1000)/1000
  if page==7:
   former_note_top=y+description_height(7.25)+19
   former_usable_height=789-former_note_top-1.4
@@ -207,7 +216,7 @@ for page in range(13):
   description_bottoms.append(glyph_bottom)
   y+=h
  if page<11:
-  if page==7:y=max(y,note_top-19)
+  if page in (0,7):y=max(y,note_top-19)
   y+=3;cell(pg,(14,y,581,y+14),'OBSERVAÇÕES GERAIS',7,True,PALE,1);y+=16
   if description_bottoms and max(description_bottoms)>y-16+.01:raise ValueError(f'Page {pnum}: notes overlap descriptions')
   for suffix,a,b in [('',14,294),('_col2',301,581)]:

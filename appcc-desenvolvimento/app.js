@@ -119,6 +119,21 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeCaptureMerge(state);
+ if(state.captureMergeVersion===CFG.captureMergeVersion)return state;
+ state.a=state.a||{};state.legacyCaptureSupplement=state.legacyCaptureSupplement||{};
+ for(let col=1;col<=4;col++){
+  const oldKey='q_p1c'+col+'_95',key='q_p1c'+col+'_4',previous=state.a[oldKey];
+  if(!previous)continue;
+  state.legacyCaptureSupplement[oldKey]=JSON.parse(JSON.stringify(previous));
+  state.a[key]=state.a[key]||{};
+  for(let j=0;j<3;j++)if(previous[j])state.a[key][j+1]={...previous[j]};
+  delete state.a[oldKey];
+ }
+ if(state.fields){const next={};for(const [name,value] of Object.entries(state.fields))next[CFG.captureMergeFieldMigration[name]||name]=value;state.fields=next;}
+ state.captureMergeVersion=CFG.captureMergeVersion;return state;
+}
+function migrateBeforeCaptureMerge(state){
  state=migrateBeforeSequentialNumbering(state);
  if(state.numberingVersion===CFG.numberingVersion)return state;
  if(state.fields){
