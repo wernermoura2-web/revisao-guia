@@ -40,12 +40,15 @@ jobs:
           node appcc-desenvolvimento/tools/test_capture_merge.cjs
           node appcc-desenvolvimento/tools/test_conduction.cjs
           node appcc-desenvolvimento/tools/test_reservoirs.cjs
+          node appcc-desenvolvimento/tools/test_paper_runtime.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'
           import shutil
           shutil.copytree('.', '_site', ignore=shutil.ignore_patterns('.git','.github','_site','.build','__pycache__','tools'))
           PY
+      - name: Empacotar interface e imagens da mesma versão
+        run: python appcc-desenvolvimento/tools/package_runtime.py --site-root _site/appcc-desenvolvimento
       - uses: actions/configure-pages@v5
         with:
           enablement: true

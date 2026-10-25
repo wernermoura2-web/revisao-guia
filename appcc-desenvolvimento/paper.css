@@ -9,3 +9,11 @@
 .paper-field.observation-column{background:white;border:.5pt solid #7f8c95}
 @media print{.paper-field.observation-column{border:.5pt solid #7f8c95!important;background:white!important}}
 
+
+/* Controls retain visible labels while data and backups finish loading. */
+.paper-field:has(button){background:#f3f6fa;border:.55pt solid #57768c}
+.paper-field button{background:#f3f6fa;color:#101820;font-weight:600;border:.45pt solid #7892a5!important}
+.paper-field button[disabled]{background:#edf1f4;color:#465766;opacity:1}
+.paper-field.phrase-trigger button{background:#075a9c;color:#fff;font-weight:700}
+.paper-field.checked button{background:#335f86;color:white}
+@media print{.paper-sheet[hidden]{display:block!important}}
