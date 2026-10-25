@@ -119,6 +119,18 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeHygienePCC(state);
+ if(state.hygienePCCVersion==='pcc-higienizacao-20261025-v2')return state;
+ state.a=state.a||{};
+ for(const [key,c] of Object.entries(CFG.itens))for(let i=0;i<c.frases.length;i++){
+  const f=c.frases[i],code=f.legacyCode||c.legacyCode||c.code,indices=f.legacyIndices||[i];
+  if((code==='4.6.5'&&indices.includes(1))||(code==='4.6.6'&&indices.includes(0))){
+   const r=state.a[key]?.[i];if(r)r.cat='PCC';
+  }
+ }
+ state.hygienePCCVersion='pcc-higienizacao-20261025-v2';return state;
+}
+function migrateBeforeHygienePCC(state){
  if(state.indicatorVersion===CFG.version)return state;
  const old=state.a||{}, next={};
  state.legacyBeforeIndicators=state.legacyBeforeIndicators||{answers:JSON.parse(JSON.stringify(old)),configurationVersion:state.configurationVersion};
