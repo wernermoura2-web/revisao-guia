@@ -223,6 +223,12 @@ with out.open('wb') as f:writer.write(f)
 
 # Backgrounds have NO widget appearances: live values and controls are drawn
 # exclusively from PAPER to prevent stale values on screen and on paper.
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from legal_documents import lock_legal_docs
+from pcc_final_pdf import add_pcc_final
+lock_legal_docs(out)
+add_pcc_final(out)
 pdf=fitz.open(out);paper=[]
 (ROOT/'paginas').mkdir(exist_ok=True)
 for i,pg in enumerate(pdf):
@@ -247,4 +253,3 @@ assert len(check.pages)==22
 assert all(fields[f'cat_{k}_{j}'].get('/V')==f['cat'] for k,c in CFG['itens'].items() for j,f in enumerate(c['frases']))
 assert all(not fields[n].get('/V') for n in expected if n.startswith('ans_'))
 print(f'Built {out.name}: {len(check.pages)} pages, {len(fields)} canonical fields')
-
