@@ -16,7 +16,8 @@ function ieShow(){
    for(var n=0;n<names.length;n++){var f=ieField.call(this,names[n]+'_'+slot);if(f)f.display=visible?display.visible:display.hidden;}
    if(!p)continue;
    var cat=indGet.call(this,'cat_'+IND_EDITOR.key+'_'+j)||p.cat,a=indGet.call(this,'ans_'+IND_EDITOR.key+'_'+j);
-   iePut.call(this,'text_'+slot,'F'+(j+1)+' - '+p.texto+'\n'+(p.ref||'')+(p.probabilityAssigned?' | P=5: critério adotado na revisão.':''));iePut.call(this,'cat_'+slot,cat);iePut.call(this,'nc_'+slot,IND_CFG.pesos[cat]);iePut.call(this,'p_'+slot,p.P);iePut.call(this,'score_'+slot,IND_CFG.pesos[cat]*p.P);iePut.call(this,'obs_'+slot,indGet.call(this,'note_'+IND_EDITOR.key+'_'+j));
+   var textField=ieField.call(this,'text_'+slot);if(textField)textField.textSize=p.orientacao?7.5:9;
+   iePut.call(this,'text_'+slot,'F'+(j+1)+' - '+p.texto+'\n'+(p.ref||'')+(p.orientacao?'\nOrientação ao inspetor: '+p.orientacao:'')+(p.probabilityAssigned?' | P=5: critério adotado na revisão.':''));iePut.call(this,'cat_'+slot,cat);iePut.call(this,'nc_'+slot,IND_CFG.pesos[cat]);iePut.call(this,'p_'+slot,p.P);iePut.call(this,'score_'+slot,IND_CFG.pesos[cat]*p.P);iePut.call(this,'obs_'+slot,indGet.call(this,'note_'+IND_EDITOR.key+'_'+j));
    for(var ai=0;ai<3;ai++){var ch=['S','N','A'][ai],f=ieField.call(this,'b_'+ch+'_'+slot);if(f){f.display=ch==='A'&&!(c.frases[j].allowNA===undefined?c.allowNA:c.frases[j].allowNA)?display.hidden:display.visible;f.value=a===ch?'Yes':'Off';}}
   }
   var pending=false,earned=0,total=0;
@@ -38,7 +39,7 @@ function ieMove(delta){if(!ieRecover.call(this))return;ieSave.call(this);var cou
 function ieDeleteClosed(){if(!IND_EDITOR_CLOSE)return;var q=IND_EDITOR_CLOSE;IND_EDITOR_CLOSE=null;try{q.doc.deletePages(q.page,q.page);}catch(e){app.alert('As respostas foram salvas. O leitor manteve a página auxiliar aberta.');}}
 function ieClose(){if(!ieRecover.call(this))return;ieSave.call(this);var e=IND_EDITOR;IND_EDITOR=null;indSet.call(this,'editor_ativo','');this.pageNum=e.returnPage;IND_EDITOR_CLOSE={doc:this,page:e.page};app.setTimeOut('ieDeleteClosed();',200);}
 function abrirFrases(k){
- var c=IND_CFG.itens[k];if(!c||(c.frases.length<2&&!c.cqId&&!c.rmId))return;
+ var c=IND_CFG.itens[k];if(!c||(c.frases.length<2&&!c.cqId&&!c.rmId&&!c.inspectorGuidanceEnabled))return;
  if(ieRecover.call(this)){if(IND_EDITOR.key===k){this.pageNum=IND_EDITOR.page;ieShow.call(this);return;}app.alert('Salve e volte ao processo antes de abrir outro indicador.');return;}
  try{var f=this.getField(c.classField),page=f&&typeof f.page==='number'?f.page:c.page;var template=this.getTemplate('APPCC_Indicador_Frases');if(!template)throw Error('Página de frases indisponível.');template.spawn(page+1,false,false);IND_EDITOR={key:k,page:page+1,returnPage:page,offset:0};ieStore.call(this);ieShow.call(this);this.pageNum=page+1;}catch(e){IND_EDITOR=null;app.alert('Abra o PDF no Adobe Acrobat para usar a página de frases. '+e);}
 }

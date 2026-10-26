@@ -67,7 +67,7 @@ def phrases_for(entries):
 
 def phrase_description(f,j,page):
  # Page 2 keeps complete requirement wording; references remain in F.
- return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page not in (0,1) else '')
+ return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page not in (0,1,6) else '')
 
 for page in range(13):
  pg=doc[page];pnum=page+1;top=183 if page==0 else (88 if page==1 else 90)
@@ -145,7 +145,7 @@ for page in range(13):
     a,b=xs[4+col],xs[5+col];cell(pg,(a,y,b,y+rowheight))
     pair=next(((k,c) for k,c in entries.items() if c['code']==str(code) and c['col']==col),None)
     if not pair:text(pg,(a,y,b,y+rowheight),'NÃO APLICÁVEL',5.6,False,1);continue
-    key,c=pair;choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if len(c['frases'])>1 else []);cw=(b-a)/len(choices)
+    key,c=pair;choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if (len(c['frases'])>1 or c.get('inspectorGuidanceEnabled')) else []);cw=(b-a)/len(choices)
     for j,ch in enumerate(choices):
      bt=y+(rowheight-11.5)/2
      r=(a+j*cw,bt,b if j==len(choices)-1 else a+(j+1)*cw,bt+11.5)
@@ -156,7 +156,7 @@ for page in range(13):
    widget(pg,f'obs_p{pnum}_{code}',(175,y+1,341,y+rowheight-1),multi=True)
    widget(pg,f'obs_p{pnum}_{code}_col2',(343,y+1,509,y+rowheight-1),multi=True)
    key=next(k for k,c in entries.items() if c['code']==str(code));c=entries[key]
-   choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if len(c['frases'])>1 else [])
+   choices=['S','N']+(['A'] if c['allowNA'] else [])+(['F'] if (len(c['frases'])>1 or c.get('inspectorGuidanceEnabled')) else [])
    button_top=y+rowheight/2-13;cw=71/len(choices)
    for j,ch in enumerate(choices):
     rect=(510+j*cw+.7,button_top,510+(j+1)*cw-.7,button_top+11.5)
@@ -186,8 +186,8 @@ for page in range(13):
  size=7.25
  # Page 8 keeps the former response grid. Shrink ONLY the description text
  # and reserve twice the baseline editable height for the two note columns.
- if page in (0,1):
-  note_top=788.3-CFG['captureObservationMinHeight' if page==0 else 'conductionObservationMinHeight']-.7
+ if page in (0,1,6):
+  note_top=788.3-CFG['captureObservationMinHeight' if page==0 else 'conductionObservationMinHeight' if page==1 else 'receptionObservationMinHeight']-.7
   available=note_top-19-y
   low,high=5.8,7.25
   for _ in range(45):
@@ -227,7 +227,7 @@ for page in range(13):
   description_bottoms.append(glyph_bottom)
   y+=h
  if page<11:
-  if page in (0,1,7):y=max(y,note_top-19)
+  if page in (0,1,6,7):y=max(y,note_top-19)
   y+=3;cell(pg,(14,y,581,y+14),'OBSERVAÇÕES GERAIS',7,True,PALE,1);y+=16
   if description_bottoms and max(description_bottoms)>y-16+.01:raise ValueError(f'Page {pnum}: notes overlap descriptions')
   for suffix,a,b in [('',14,294),('_col2',301,581)]:
