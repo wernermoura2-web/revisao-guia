@@ -11,7 +11,7 @@
   const fragment=document.createDocumentFragment();let current=null;
   rows.forEach((row,n)=>{
    if(row.proc!==current){fragment.appendChild(create('h2','process-title',row.process));current=row.proc;}
-   const card=create('article','guidance-card'),heading=create('div','card-heading'),title=create('h3','',`${api.guide==='original'?'Item':'Indicador'} ${row.code} · ${row.phraseLabels.join(' / ')}`),badge=create('span','edited','Revisada');badge.hidden=!api.changed(row.id);heading.append(title,badge);card.appendChild(heading);
+   const card=create('article','guidance-card'),heading=create('div','card-heading'),title=create('h3','',`${row.processId?row.processId+' · ':''}${api.guide==='original'?'Item':'Indicador'} ${row.code} · ${row.phraseLabels.join(' / ')}`),badge=create('span','edited','Revisada');badge.hidden=!api.changed(row.id);heading.append(title,badge);card.appendChild(heading);
    card.appendChild(create('p','requirement',row.requirement));
    if(api.guide==='revision'&&row.references.length)card.appendChild(create('p','reference','Referência normativa: '+row.references.join(' · ')));
 
@@ -29,7 +29,7 @@
   let proc=null,section;
   for(const row of catalog){
    if(proc!==row.proc){section=create('section','report-process');section.appendChild(create('h2','',row.process));fragment.appendChild(section);proc=row.proc;}
-   const article=create('article','report-row');article.appendChild(create('h3','',`${api.guide==='original'?'Item':'Indicador'} ${row.code} · ${row.phraseLabels.join(' / ')}`));article.appendChild(create('p','',row.requirement));const p=create('p','guidance-text');p.append(create('strong','','Orientação ao inspetor: '),document.createTextNode(api.value(row.id)||'Orientação não preenchida.'));article.appendChild(p);if(row.references.length)article.appendChild(create('p','report-reference','Referência normativa: '+row.references.join(' · ')));section.appendChild(article);
+   const article=create('article','report-row');article.appendChild(create('h3','',`${row.processId?row.processId+' · ':''}${api.guide==='original'?'Item':'Indicador'} ${row.code} · ${row.phraseLabels.join(' / ')}`));article.appendChild(create('p','',row.requirement));const p=create('p','guidance-text');p.append(create('strong','','Orientação ao inspetor: '),document.createTextNode(api.value(row.id)||'Orientação não preenchida.'));article.appendChild(p);if(row.references.length)article.appendChild(create('p','report-reference','Referência normativa: '+row.references.join(' · ')));section.appendChild(article);
   }
   report.replaceChildren(fragment);
  }

@@ -34,7 +34,7 @@ def render_hygiene_page(pg,cfg,text,cell,widget,inset):
   y+=12
  y+=3;cell(pg,(14,y,581,y+14),'SÍNTESE - TEXTOS COMPLETOS, REFERÊNCIAS E ORIENTAÇÕES AO INSPETOR NO F',6.2,True,pale,1);y+=14
  for code in codes:
-  c=next(c for c in entries.values()if int(c['code'])==code);count='/'.join(dict.fromkeys(str(len(i['frases']))for i in entries.values()if int(i['code'])==code));cell(pg,(14,y,60,y+13),str(code),6,True,pale,1);cell(pg,(60,y,581,y+13),c['title']+f' - {count} '+('frase'if count=='1'else'frases')+'; consultar F.',6.5);y+=13
+  c=next(c for c in entries.values()if int(c['code'])==code);count='/'.join(dict.fromkeys(str(len(i['frases']))for i in entries.values()if int(i['code'])==code));cell(pg,(14,y,60,y+13),c['processId']+' / '+str(code),6,True,pale,1);cell(pg,(60,y,581,y+13),c['title']+f' - {count} '+('frase'if count=='1'else'frases')+'; consultar F.',6.5);y+=13
  note_top=788.3-cfg['hygieneObservationMinHeight'][str(page)]-.7
  assert y+19<=note_top,(page,y,note_top)
  cell(pg,(14,note_top-16,581,note_top-2),'OBSERVAÇÕES GERAIS - EXECUÇÃO, RESULTADOS E PROVIDÊNCIAS',6.5,True,pale,1)

@@ -17,6 +17,9 @@ for c in CFG['itens'].values():
  for f in c['frases']:
   if f['texto'] in SUMMARIES:f['resumo']=SUMMARIES[f['texto']]
 
+from process_metadata import apply as apply_process_metadata
+apply_process_metadata(CFG,ROOT)
+
 BUILD=ROOT/'.build';BUILD.mkdir(exist_ok=True)
 SOURCE=BUILD/'source.pdf'
 if not SOURCE.exists():
@@ -193,6 +196,23 @@ for page in range(13):
   for i,(value,color) in enumerate(zip(ranges,colors)):a=126+i*(455/4);cell(pg,(a,y,a+455/4,y+legend_h),value,6.4,True,color,1)
   y+=legend_h
  y+=2 if page==1 else 4
+ # CQ-style overview for capture, conduction and reception, with notes unchanged.
+ if page in (0,1,6):
+  note_top=788.3-CFG['captureObservationMinHeight' if page==0 else 'conductionObservationMinHeight' if page==1 else 'receptionObservationMinHeight']-.7
+  for code in codes:
+   c=next(c for c in entries.values() if c['code']==str(code))
+   cell(pg,(14,y,60,y+21),c['processId']+' / '+c['code'],6,True,PALE,1)
+   cell(pg,(60,y,581,y+21),c['title']+" - requisitos e referências no F.",7)
+   y+=21
+  assert y+19<=note_top,(page,y,note_top)
+  cell(pg,(14,note_top-16,581,note_top-2),'OBSERVAÇÕES GERAIS',7,True,PALE,1)
+  for suffix,a,b in [('',14,294),('_col2',301,581)]:
+   cell(pg,(a,note_top,b,789));widget(pg,f'obs_gerais_p{pnum}{suffix}',inset((a,note_top,b,789)),multi=True)
+  for key,c in entries.items():
+   for j,f in enumerate(c['frases']):
+    for prefix,value in [('ans',''),('cat',f['cat']),('note','')]:widget(pg,f'{prefix}_{key}_{j}',(-30,-30,-20,-20),value)
+  print(f'Page {pnum}: CQ-style overview; {len(codes)} codes; full requirements/references in F; notes preserved')
+  continue
  # Full legislative text, including the references. Font size is fitted once
  # per page. Never silently clip or omit a phrase to fit a fixed page count.
  available=788-y-(68 if page<11 else 0)
