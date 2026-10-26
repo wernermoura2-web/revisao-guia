@@ -119,6 +119,16 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeFillingReview(state);
+ if(state.fillingReviewVersion===CFG.fillingReviewVersion)return state;
+ state.a=state.a||{};state.legacyFillingReview=state.legacyFillingReview||{};
+ for(const [key,c] of Object.entries(CFG.itens))if(c.proc==='4.7'&&state.a[key]){
+  const old=JSON.parse(JSON.stringify(state.a[key]));state.legacyFillingReview[key]=old;const next={};
+  c.frases.forEach((f,i)=>{const j=f.fillingPreviousIndex;if(j!==null&&j!==undefined&&old[j])next[i]={...old[j]};});state.a[key]=next;
+ }
+ state.fillingReviewVersion=CFG.fillingReviewVersion;return state;
+}
+function migrateBeforeFillingReview(state){
  state=migrateBeforeHygieneReview(state);
  if(state.hygieneReviewVersion===CFG.hygieneReviewVersion)return state;
  state.a=state.a||{};state.legacyHygieneReview=state.legacyHygieneReview||{};

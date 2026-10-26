@@ -45,6 +45,7 @@ jobs:
           node appcc-desenvolvimento/tools/test_reception.cjs
           node appcc-desenvolvimento/tools/test_inspector_guidance.cjs
           node appcc-desenvolvimento/tools/test_hygiene_review.cjs
+          node appcc-desenvolvimento/tools/test_filling_review.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'
