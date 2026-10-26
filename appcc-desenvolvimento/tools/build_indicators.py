@@ -90,6 +90,10 @@ for page in range(13):
   from responsibility_page import render_responsibility_page
   render_responsibility_page(pg,CFG,text,cell,widget,inset)
   continue
+ if page in (7,8):
+  from hygiene_page import render_hygiene_page
+  render_hygiene_page(pg,CFG,text,cell,widget,inset)
+  continue
  if 2<=page<=5:
   from reservoir_page import render_reservoir_page
   render_reservoir_page(pg,CFG,text,cell,widget,inset)
