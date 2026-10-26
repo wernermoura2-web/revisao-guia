@@ -1,5 +1,6 @@
 """Compact, editable CQ overview; full wording remains in the native F editor."""
 import fitz
+from process_metadata import summary
 
 def render_quality_page(pg,cfg,text,cell,widget,inset):
  blue=(.86,.91,.94);pale=(.94,.96,.97)
@@ -37,7 +38,7 @@ def render_quality_page(pg,cfg,text,cell,widget,inset):
  for key,c in ordered:
   h=13
   cell(pg,(14,y,60,y+h),c['cqId']+' / '+c['code'],5.8,True,pale,1)
-  cell(pg,(60,y,581,y+h),c['title']+f" - {len(c['frases'])} frase(s); consultar F.",7,False,None)
+  cell(pg,(60,y,581,y+h),summary(c),7,False,None)
   y+=h
  text(pg,(14,y+2,581,792),'Novos requisitos: P=5 por critério adotado na revisão; probabilidades documentadas preservadas nas frases mantidas.',6.4,False)
  # All original wording and answers remain canonical/editable in Acrobat.

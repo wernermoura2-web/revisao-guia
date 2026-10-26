@@ -17,7 +17,7 @@ for c in CFG['itens'].values():
  for f in c['frases']:
   if f['texto'] in SUMMARIES:f['resumo']=SUMMARIES[f['texto']]
 
-from process_metadata import apply as apply_process_metadata
+from process_metadata import apply as apply_process_metadata, summary
 apply_process_metadata(CFG,ROOT)
 
 BUILD=ROOT/'.build';BUILD.mkdir(exist_ok=True)
@@ -202,7 +202,7 @@ for page in range(13):
   for code in codes:
    c=next(c for c in entries.values() if c['code']==str(code))
    cell(pg,(14,y,60,y+21),c['processId']+' / '+c['code'],6,True,PALE,1)
-   cell(pg,(60,y,581,y+21),c['title']+" - requisitos e referências no F.",7)
+   cell(pg,(60,y,581,y+21),summary(c),7)
    y+=21
   assert y+19<=note_top,(page,y,note_top)
   cell(pg,(14,note_top-16,581,note_top-2),'OBSERVAÇÕES GERAIS',7,True,PALE,1)
@@ -303,6 +303,9 @@ add_pcc_final(out)
 pdf=fitz.open(out);paper=[]
 (ROOT/'paginas').mkdir(exist_ok=True)
 for i,pg in enumerate(pdf):
+ if i<13:
+  expected=len({c['code']for c in CFG['itens'].values()if c['page']==i})
+  assert pg.get_text().count('Ref.:')==expected,('Missing visible normative reference',i,expected)
  fields=[]
  for w in pg.widgets() or []:
   if w.rect.x1<0 or w.field_name.startswith(('ans_q_','cat_q_','note_q_')):continue

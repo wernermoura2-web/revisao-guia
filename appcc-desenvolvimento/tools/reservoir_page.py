@@ -1,5 +1,6 @@
 """Reservoir overview, preserving all full CP clauses in the native F editor."""
 import fitz
+from process_metadata import summary
 
 def render_reservoir_page(pg,cfg,text,cell,widget,inset):
  page=pg.number;pnum=page+1;blue=(.86,.91,.94);pale=(.94,.96,.97)
@@ -40,7 +41,7 @@ def render_reservoir_page(pg,cfg,text,cell,widget,inset):
  y+=3;cell(pg,(14,y,581,y+14),'SÍNTESE DOS INDICADORES - TEXTOS INTEGRAIS DA CP E REFERÊNCIAS NO BOTÃO F',6.4,True,pale,1);y+=14
  for code in codes:
   c=next(c for c in entries.values() if int(c['code'])==code)
-  cell(pg,(14,y,60,y+15),c['processId']+' / '+str(code),6.3,True,pale,1);cell(pg,(60,y,581,y+15),c['title']+f" - {len(c['frases'])} frases; consultar F.",7);y+=15
+  cell(pg,(14,y,60,y+15),c['processId']+' / '+str(code),6.3,True,pale,1);cell(pg,(60,y,581,y+15),summary(c),7);y+=15
  text(pg,(14,y+2,581,y+13),f'Registrar fontes, modo de operação e manobras no F do indicador {operation_code}. Complementos do guia com P=5.',6.2);y+=14
  note_top=788.3-cfg['reservoirObservationMinHeight']-.7
  assert y+16<=note_top,(y,note_top)
