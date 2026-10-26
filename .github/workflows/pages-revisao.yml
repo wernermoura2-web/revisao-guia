@@ -41,6 +41,7 @@ jobs:
           node appcc-desenvolvimento/tools/test_conduction.cjs
           node appcc-desenvolvimento/tools/test_reservoirs.cjs
           node appcc-desenvolvimento/tools/test_paper_runtime.cjs
+          node appcc-desenvolvimento/tools/test_capture_classification.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'

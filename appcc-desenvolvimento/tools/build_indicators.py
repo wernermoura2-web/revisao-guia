@@ -67,7 +67,7 @@ def phrases_for(entries):
 
 def phrase_description(f,j,page):
  # Page 2 keeps complete requirement wording; references remain in F.
- return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page!=1 else '')
+ return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page not in (0,1) else '')
 
 for page in range(13):
  pg=doc[page];pnum=page+1;top=183 if page==0 else (88 if page==1 else 90)
@@ -103,7 +103,7 @@ for page in range(13):
  headers=['INDIC.','APPCC','NC','P','NC x P']
  if page<11:headers+=names.get(page,['RESERV. 1','RESERV. 2','RESERV. 3','RESERV. 4'])+['RESULTADO']
  else:headers+=['OBSERVAÇÕES (2 COLUNAS)','RESULTADO']
- hh=22 if page==1 else (28 if page<11 else 22)
+ hh=22 if page in (0,1) else (28 if page<11 else 22)
  for a,b,label in zip(xs,xs[1:],headers):cell(pg,(a,top,b,top+hh),label,6.2,True,BLUE,1)
  y=top+hh
  if page in (0,1):
@@ -125,7 +125,7 @@ for page in range(13):
    for j,(left,right,label) in enumerate([(a,mid,'Poço'),(mid,b,'Surgência')]):
     widget(pg,f'fonte_{col}_{j}',inset((left,y,right,y+14)),label=label,button=True,script=f'selecionarFonte.call(this,{col},{json.dumps(label)});')
   cell(pg,(510,y,581,y+14));y+=14
- rowheight=(14 if page==1 else 15.3) if page<11 else (23 if page==11 else 37)
+ rowheight=(14 if page in (0,1) else 15.3) if page<11 else (23 if page==11 else 37)
  if page in (11,12):
   rowheight=(788-y-56-description_height(7.25))/len(codes)
  for code in codes:

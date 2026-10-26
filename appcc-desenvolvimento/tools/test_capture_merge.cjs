@@ -6,7 +6,7 @@ const input={meta:{},a:{q_p1c1_4:{0:{a:'S',obs:'Monitoramento'}},q_p1c1_95:{0:{a
 const after=migrateCurrentState(JSON.parse(JSON.stringify(input)));
 if(after.a.q_p1c1_4[0].obs!=='Monitoramento'||after.a.q_p1c1_4[1].obs!=='Concentração'||after.a.q_p1c1_4[2].a!=='N'||after.a.q_p1c1_4[3].obs!=='Registro')throw Error('Respostas da unificação perdidas');
 if(after.a.q_p1c1_95)throw Error('Item duplicado');
-if(after.a.q_p2c1_6[0].obs!=='Condução'||after.notes[0]!=='Nota geral'||after.fields.obs_p13_76!=='Nota formação')throw Error('Dados de outros campos alterados');
+if(after.a.q_p2c1_6[0].obs!=='Condução'||after.notes[0]!=='Nota geral'||after.fields.obs_p13_77!=='Nota formação')throw Error('Dados de outros campos alterados');
 if(after.legacyCaptureSupplement.q_p1c1_95[1].obs!=='Resíduo')throw Error('Histórico perdido');
 if(JSON.stringify(migrateCurrentState(JSON.parse(JSON.stringify(after))))!==JSON.stringify(after))throw Error('Migração não idempotente');
 `,ctx);

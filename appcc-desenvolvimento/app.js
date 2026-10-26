@@ -119,6 +119,12 @@ function migrateReceptionState(state){
 // Transfer existing data through the explicit semantic crosswalk. New legal
 // obligations remain pending; the complete old answers are retained for recovery.
 function migrateCurrentState(state){
+ state=migrateBeforeCaptureClassification(state);
+ if(state.captureClassificationVersion===CFG.captureClassificationVersion)return state;
+ if(state.fields){const next={};for(const [name,value] of Object.entries(state.fields))next[CFG.captureClassificationFieldMigration[name]||name]=value;state.fields=next;}
+ state.captureClassificationVersion=CFG.captureClassificationVersion;return state;
+}
+function migrateBeforeCaptureClassification(state){
  state=migrateBeforeReservoirReview(state);
  if(state.reservoirReviewVersion===CFG.reservoirReviewVersion)return state;
  state.a=state.a||{};state.legacyReservoirReview=state.legacyReservoirReview||{};

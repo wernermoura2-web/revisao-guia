@@ -16,7 +16,7 @@ const after=migrateCurrentState(JSON.parse(JSON.stringify(input)));
 if(after.a.q_p3c1_14[0].obs!=='Extravasor'||after.a.q_p3c1_16[2].a!=='S')throw Error('Perdeu resposta mantida');
 if(after.a.q_p3c1_14[3]||after.a.q_p3c1_14[4]||after.a.q_p3c1_16[3]||after.a.q_p3c1_96)throw Error('Nova avaliação herdou resposta');
 if(after.legacyReservoirReview.q_p3c1_14[3].obs!=='Sem registro de filtro'||after.legacyReservoirReview.q_p3c1_16[3].obs!=='Registro antigo')throw Error('Histórico perdido');
-if(after.a.q_p2c1_10[0].obs!=='Condução mantida'||after.notes[2]!=='Nota reservatório'||after.fields.obs_p7_19!=='Recepção')throw Error('Dados não relacionados alterados');
+if(after.a.q_p2c1_10[0].obs!=='Condução mantida'||after.notes[2]!=='Nota reservatório'||after.fields.obs_p7_20!=='Recepção')throw Error('Dados não relacionados alterados');
 if(JSON.stringify(migrateCurrentState(JSON.parse(JSON.stringify(after))))!==JSON.stringify(after))throw Error('Migração não idempotente');
 S=after;if(processResult('4.3')!==null)throw Error('Novos devem ficar pendentes');
 for(const [k,c]of Object.entries(CFG.itens))if(c.proc==='4.3')S.a[k]=Object.fromEntries(c.frases.map((f,i)=>[i,{a:'S',cat:f.cat}]));

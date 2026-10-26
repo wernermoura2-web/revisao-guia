@@ -4,6 +4,7 @@ import fitz
 def render_reservoir_page(pg,cfg,text,cell,widget,inset):
  page=pg.number;pnum=page+1;blue=(.86,.91,.94);pale=(.94,.96,.97)
  entries={k:c for k,c in cfg['itens'].items() if c['page']==page}
+ operation_code=next(c['code'] for c in entries.values() if c['sourceSerial']==96)
  pg.add_redact_annot(fitz.Rect(14,71,582,88),fill=blue);pg.apply_redactions(images=0,graphics=1)
  text(pg,(14,71,582,88),f'Reservatórios - Captação {page-1} / origens e manobras no botão F',8,True,1)
  codes=cfg['pageIndicatorOrder'][str(page)];xs=[14,60,98,126,155,174,258,342,426,510,581];y=90
@@ -40,7 +41,7 @@ def render_reservoir_page(pg,cfg,text,cell,widget,inset):
  for code in codes:
   c=next(c for c in entries.values() if int(c['code'])==code)
   cell(pg,(14,y,60,y+15),str(code),6.3,True,pale,1);cell(pg,(60,y,581,y+15),c['title']+f" - {len(c['frases'])} frases; consultar F.",7);y+=15
- text(pg,(14,y+2,581,y+13),'Registrar fontes, modo de operação e manobras no F do indicador 18. Complementos do guia com P=5.',6.2);y+=14
+ text(pg,(14,y+2,581,y+13),f'Registrar fontes, modo de operação e manobras no F do indicador {operation_code}. Complementos do guia com P=5.',6.2);y+=14
  note_top=788.3-cfg['reservoirObservationMinHeight']-.7
  assert y+16<=note_top,(y,note_top)
  cell(pg,(14,note_top-16,581,note_top-2),'OBSERVAÇÕES GERAIS - OPERAÇÃO, EVIDÊNCIAS E DOCUMENTOS',6.7,True,pale,1)
