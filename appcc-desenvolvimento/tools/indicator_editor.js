@@ -17,7 +17,7 @@ function ieShow(){
    if(!p)continue;
    var cat=indGet.call(this,'cat_'+IND_EDITOR.key+'_'+j)||p.cat,a=indGet.call(this,'ans_'+IND_EDITOR.key+'_'+j);
    var textField=ieField.call(this,'text_'+slot);if(textField)textField.textSize=p.orientacao?7.5:9;
-   iePut.call(this,'text_'+slot,'F'+(j+1)+' - '+p.texto+'\n'+(p.ref||'')+(p.sourceTexto?'\nTexto de referência: '+p.sourceTexto:'')+(p.orientacao?'\nOrientação ao inspetor: '+p.orientacao:'')+(p.probabilityAssigned?' | P=5: critério adotado na revisão.':''));iePut.call(this,'cat_'+slot,cat);iePut.call(this,'nc_'+slot,IND_CFG.pesos[cat]);iePut.call(this,'p_'+slot,p.P);iePut.call(this,'score_'+slot,IND_CFG.pesos[cat]*p.P);iePut.call(this,'obs_'+slot,indGet.call(this,'note_'+IND_EDITOR.key+'_'+j));
+   iePut.call(this,'text_'+slot,'F'+(j+1)+' - '+(p.resumo||p.texto)+'\n'+(p.ref||'')+(p.sourceTexto?'\nTexto de referência: '+p.sourceTexto:'')+(p.orientacao?'\nOrientação ao inspetor: '+p.orientacao:'')+(p.probabilityAssigned?' | P=5: critério adotado na revisão.':''));iePut.call(this,'cat_'+slot,cat);iePut.call(this,'nc_'+slot,IND_CFG.pesos[cat]);iePut.call(this,'p_'+slot,p.P);iePut.call(this,'score_'+slot,IND_CFG.pesos[cat]*p.P);iePut.call(this,'obs_'+slot,indGet.call(this,'note_'+IND_EDITOR.key+'_'+j));
    for(var ai=0;ai<3;ai++){var ch=['S','N','A'][ai],f=ieField.call(this,'b_'+ch+'_'+slot);if(f){f.display=ch==='A'&&!(c.frases[j].allowNA===undefined?c.allowNA:c.frases[j].allowNA)?display.hidden:display.visible;f.value=a===ch?'Yes':'Off';}}
   }
   var pending=false,earned=0,total=0;

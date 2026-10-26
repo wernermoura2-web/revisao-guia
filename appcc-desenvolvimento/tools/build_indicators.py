@@ -12,6 +12,11 @@ from pypdf.generic import NameObject, DictionaryObject, ArrayObject, NumberObjec
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 CFG=json.loads((ROOT/'config.js').read_text().split('=',1)[1].rstrip().rstrip(';'))
+SUMMARIES=json.loads((ROOT/'phrase-summaries.json').read_text())
+for c in CFG['itens'].values():
+ for f in c['frases']:
+  if f['texto'] in SUMMARIES:f['resumo']=SUMMARIES[f['texto']]
+
 BUILD=ROOT/'.build';BUILD.mkdir(exist_ok=True)
 SOURCE=BUILD/'source.pdf'
 if not SOURCE.exists():
@@ -67,7 +72,7 @@ def phrases_for(entries):
 
 def phrase_description(f,j,page):
  # Page 2 keeps complete requirement wording; references remain in F.
- return f'F{j} - '+f['texto']+((' ['+f['ref']+']') if page not in (0,1,6) else '')
+ return f'F{j} - '+f.get('resumo',f['texto'])+((' ['+f['ref']+']') if page not in (0,1,6) else '')
 
 for page in range(13):
  pg=doc[page];pnum=page+1;top=183 if page==0 else (88 if page==1 else 90)

@@ -49,6 +49,8 @@ jobs:
           node --check appcc-desenvolvimento/inspector-orientations.js
           node --check appcc-desenvolvimento/orientacoes-inspetores.js
           node appcc-desenvolvimento/tools/test_orientation_review.cjs
+          node --check appcc-desenvolvimento/phrase-summaries.js
+          node appcc-desenvolvimento/tools/test_phrase_summaries.cjs
       - name: Preservar todas as páginas existentes e preparar a revisão
         run: |
           python - <<'PY'

@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse,hashlib,json,re,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1]
-FILES=['storage-separation.js','config.js','paper-data-layout-v6.js','inspector-orientations.js','app.js','legal-documents.js','pcc-final.js','paper.js','guidance-annex.js','backup.js','install.js']
+FILES=['storage-separation.js','config.js','paper-data-layout-v6.js','phrase-summaries.js','inspector-orientations.js','app.js','legal-documents.js','pcc-final.js','paper.js','guidance-annex.js','backup.js','install.js']
 def package(site):
  content={n:(site/n).read_text() for n in FILES}
  paper=json.loads(content['paper-data-layout-v6.js'].split('=',1)[1].strip().rstrip(';'))
