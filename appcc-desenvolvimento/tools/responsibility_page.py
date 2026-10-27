@@ -38,9 +38,11 @@ def render_responsibility_page(pg,cfg,text,cell,widget,inset):
  for key,c in ordered:
   h=24
   cell(pg,(14,y,60,y+h),c['rmId']+' / '+c['code'],5.8,True,pale,1)
-  cell(pg,(60,y,581,y+h),summary(c),7,False,None)
+  cell(pg,(60,y,581,y+h))
+  text(pg,(60,y,581,y+9),c['title'],6.8,True)
+  text(pg,(60,y+9,581,y+h),'Ref.: '+c['overviewRef'],5.7)
   y+=h
- text(pg,(14,y+2,581,792),'Novos requisitos: P=5. P anterior preservado nas frases mantidas. Rotulagem avaliada no CQ15. APPCC por frase no F.',6.4,False)
+ text(pg,(14,y+2,581,792),'CP 1362/2025: proposta para finalização após publicação das normas. Novas frases: P=5; anteriores preservadas. Referências completas no F.',6.4,False)
  # All original wording and answers remain canonical/editable in Acrobat.
  for key,c in ordered:
   for j,f in enumerate(c['frases']):

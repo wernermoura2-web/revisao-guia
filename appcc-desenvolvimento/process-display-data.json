@@ -461,42 +461,42 @@
   },
   "12:75": {
     "processId": "RM01",
-    "title": "Capacitação dos manipuladores",
-    "overviewRef": "RDC 173/06; Port. SUVISA; RDC 275/02"
+    "title": "Capacitação dos operadores",
+    "overviewRef": "RDC 173/06; Port. SUVISA; RDC 275/02; CP 1362/2025 (proposta), arts. 42, 44, 45, 48, 49 e 167"
   },
   "12:76": {
     "processId": "RM02",
-    "title": "Responsáveis pela industrialização e higienização",
-    "overviewRef": "RDC 173/06; Lei RJ 10003/23"
+    "title": "Responsabilidade técnica e industrialização",
+    "overviewRef": "RDC 173/06; Lei RJ 10003/23; CP 1362/2025 (proposta), arts. 44 a 47"
   },
   "12:77": {
     "processId": "RM03",
-    "title": "Formação do responsável pela industrialização",
-    "overviewRef": "RDC 173/06; Port. SUVISA"
+    "title": "Competência do responsável",
+    "overviewRef": "RDC 173/06; Port. SUVISA; CP 1362/2025 (proposta), art. 50"
   },
   "12:78": {
     "processId": "RM04",
     "title": "Certificados e registros de capacitação",
-    "overviewRef": "RDC 173/06; Port. SUVISA; RDC 275/02"
+    "overviewRef": "RDC 173/06; Port. SUVISA; RDC 275/02; CP 1362/2025 (proposta), art. 51"
   },
   "12:79": {
     "processId": "RM05",
-    "title": "POP e execução da higiene pessoal",
-    "overviewRef": "RDC 173/06; RDC 275/02"
+    "title": "Higiene pessoal e mãos",
+    "overviewRef": "RDC 173/06; RDC 275/02; CP 1362/2025 (proposta), arts. 63 a 70 e 158"
   },
   "12:80": {
     "processId": "RM06",
-    "title": "Saúde dos manipuladores",
-    "overviewRef": "RDC 173/06; RDC 275/02"
+    "title": "Saúde dos operadores",
+    "overviewRef": "RDC 173/06; RDC 275/02; CP 1362/2025 (proposta), arts. 62 e 157"
   },
   "12:81": {
     "processId": "RM07",
-    "title": "Conduta e acesso às áreas de produção",
-    "overviewRef": "RDC 275/02; RDC 173/06"
+    "title": "Conduta, acesso e visitantes",
+    "overviewRef": "RDC 275/02; RDC 173/06; CP 1362/2025 (proposta), arts. 65 e 71"
   },
   "12:82": {
     "processId": "RM08",
-    "title": "Supervisão e correção de desvios",
-    "overviewRef": "RDC 275/02"
+    "title": "Supervisão e equipe operacional",
+    "overviewRef": "RDC 275/02; CP 1362/2025 (proposta), arts. 41, 44, 47 e 76 a 78"
   }
 }

@@ -1,0 +1,275 @@
+{
+  "RM01": {
+    "refs": {
+      "0": "arts. 42 e 44",
+      "1": "arts. 45, 48, 49 e 167",
+      "2": "art. 48, parágrafo único"
+    },
+    "add": [
+      {
+        "texto": "A capacitação é contínua, adequada à função e ao conhecimento dos operadores, avaliada periodicamente e atualizada quando necessário.",
+        "ref": "CP Anvisa 1362/2025 (proposta), arts. 45, 48 e 167",
+        "orientacao": "Conferir o programa por função, a compreensão das instruções e as revisões após mudanças ou falhas.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Capacitação contínua, adequada à função e atualizada."
+      },
+      {
+        "texto": "Os operadores conhecem os perigos da sua atividade, as medidas de controle, suas responsabilidades e a conduta diante de desvios.",
+        "ref": "CP Anvisa 1362/2025 (proposta), arts. 42 e 49",
+        "orientacao": "Pedir a operadores de turnos distintos que expliquem os riscos e demonstrem o que fazem quando identificam uma falha.",
+        "cat": "PC",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Conhecimento dos perigos, controles e conduta diante de desvios."
+      }
+    ]
+  },
+  "RM02": {
+    "refs": {
+      "0": "art. 44"
+    },
+    "add": [
+      {
+        "texto": "O responsável técnico está habilitado perante o conselho profissional e atende às regras do exercício profissional.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 46",
+        "orientacao": "Conferir habilitação, situação no conselho e atribuições para a atividade, distinguindo o RT do responsável legal.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "RT habilitado no conselho profissional."
+      },
+      {
+        "texto": "O responsável técnico avalia os riscos e intervém efetivamente nos controles de segurança da água.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 47",
+        "orientacao": "Rastrear uma decisão ou desvio recente e verificar a participação do RT, as orientações emitidas e o acompanhamento.",
+        "cat": "PC",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "RT atuante na avaliação e no controle dos riscos."
+      }
+    ]
+  },
+  "RM03": {
+    "refs": {},
+    "add": [
+      {
+        "texto": "O responsável técnico demonstra conhecimento de legislação sanitária, APPCC, controle de alergênicos, toxicologia, amostragem, rastreabilidade e recolhimento.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 50, I a VI",
+        "orientacao": "Usar situações da envasadora para avaliar o conhecimento. No controle de alergênicos, verificar a avaliação de aplicabilidade ao processo e insumos; não exigir risco inexistente.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "RT capacitado em legislação, APPCC e controles de segurança."
+      },
+      {
+        "texto": "O responsável técnico domina capacitação, Manual de BPF, POP, auditorias, vigilância epidemiológica, nutrivigilância, atendimento ao consumidor, rotulagem e seleção de insumos, métodos e equipamentos.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 50, VII a XV",
+        "orientacao": "Conferir como esses conhecimentos são usados nas decisões da empresa e nos documentos sob sua responsabilidade.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "RT capacitado em gestão, documentos e atividades sob sua responsabilidade."
+      }
+    ]
+  },
+  "RM04": {
+    "refs": {
+      "0": "art. 51",
+      "1": "art. 51"
+    },
+    "add": [
+      {
+        "texto": "Os registros de capacitação identificam nominalmente os participantes, as datas e os horários de realização.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 51",
+        "orientacao": "Cruzar participantes, turnos, datas e horários com os registros das atividades, preservando também os certificados exigidos pelas normas atuais.",
+        "cat": "PC",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Registros nominais, com datas e horários."
+      }
+    ]
+  },
+  "RM05": {
+    "refs": {
+      "0": "art. 158",
+      "1": "arts. 66, 67, 69 e 70",
+      "2": "arts. 63 e 64"
+    },
+    "add": [
+      {
+        "texto": "O POP de higiene das mãos define monitoramento e medidas corretivas diante de falhas.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 158 (monitoramento e medidas corretivas)",
+        "orientacao": "Conferir quem verifica a execução, como registra falhas e como determina e acompanha a correção.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "POP de mãos: monitoramento e correções."
+      },
+      {
+        "texto": "Luvas e antissépticos não substituem a lavagem das mãos, e seu uso não causa recontaminação.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 66, §§ 2º e 3º",
+        "orientacao": "Observar troca, conservação e uso de luvas e a lavagem anterior à aplicação de antisséptico.",
+        "cat": "PPHO",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Luvas e antissépticos sem substituir a lavagem das mãos."
+      },
+      {
+        "texto": "As instruções de higiene das mãos estão visíveis nos locais de produção, sanitários e lavatórios.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 68",
+        "orientacao": "Verificar localização, legibilidade e correspondência das instruções com o procedimento executado.",
+        "cat": "PC",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Instruções de higiene visíveis."
+      }
+    ]
+  },
+  "RM06": {
+    "refs": {
+      "0": "art. 157",
+      "1": "art. 157",
+      "2": "art. 62"
+    },
+    "add": [
+      {
+        "texto": "As condições de saúde dos manipuladores são acompanhadas e avaliadas diariamente conforme o POP.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 157, IV",
+        "orientacao": "Verificar como se realiza a avaliação diária, quem recebe as informações e quais condutas são adotadas, sem expor dados clínicos desnecessários.",
+        "cat": "PC",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Acompanhamento diário da saúde."
+      },
+      {
+        "texto": "Sintomas e lesões com risco de contaminação são comunicados imediatamente ao supervisor.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 62, § 2º",
+        "orientacao": "Perguntar aos operadores quais situações comunicam e a quem; rastrear uma ocorrência sem divulgar dados pessoais.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Comunicação imediata de sintomas e lesões."
+      },
+      {
+        "texto": "O encaminhamento médico, o afastamento e o retorno às atividades seguem a condição de saúde e a avaliação médica quando necessária.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 62, §§ 3º a 5º",
+        "orientacao": "Conferir a conduta diante de doenças ou ferimentos e os critérios de retorno ou remanejamento para atividade sem contato com o produto.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Encaminhamento, afastamento e retorno controlados."
+      }
+    ]
+  },
+  "RM07": {
+    "refs": {
+      "0": "art. 65",
+      "1": "art. 71"
+    },
+    "add": [
+      {
+        "texto": "Visitantes e pessoal de manutenção são orientados, supervisionados e cumprem os requisitos de saúde, vestimenta, higiene e conduta antes de acessar a produção.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 71 e parágrafo único",
+        "orientacao": "Acompanhar a entrada de visitante ou manutenção e conferir as orientações, a verificação de saúde e a supervisão.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Visitantes e manutenção orientados e supervisionados."
+      }
+    ]
+  },
+  "RM08": {
+    "refs": {
+      "0": "arts. 44 e 47",
+      "1": "arts. 76 a 78"
+    },
+    "add": [
+      {
+        "texto": "Há operadores em número suficiente para as atividades e os turnos de funcionamento.",
+        "ref": "CP Anvisa 1362/2025 (proposta), art. 41",
+        "orientacao": "Comparar equipe e turnos com operação, higienização, monitoramento e supervisão; verificar acúmulos que impeçam os controles.",
+        "cat": "PPR",
+        "P": 5,
+        "allowNA": false,
+        "newRequirement": true,
+        "probabilityAssigned": true,
+        "probabilityBasis": "P=5 por critério adotado para requisito novo; não estimativa de frequência nas empresas.",
+        "regulatoryStatus": "proposta em consulta pública",
+        "cpReviewVersion": "responsaveis-cp1362-20261027",
+        "resumo": "Equipe suficiente por atividade e turno."
+      }
+    ]
+  }
+}
